@@ -4,8 +4,8 @@ COPY package*.json ./
 RUN npm install -frozen-lockfile
 COPY . .
 COPY .env.example .env
-RUN npm run build
-ENV NODE_ENV=production
+# RUN npm run build
+ENV NODE_ENV=development
 
 # FROM node:alpine
 # ENV NODE_ENV=production
@@ -19,4 +19,4 @@ ENV NODE_ENV=production
 # COPY -from=builder /app/node_modules/ ./node_modules/
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

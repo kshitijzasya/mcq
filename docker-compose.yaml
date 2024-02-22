@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  mcqapp:
+    container_name: mcqapp
+    build:
+      context: .
+    restart: always
+    environment:
+      - NODE_ENV=development
+      - WATCHPACL_POLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - 3000:3000
