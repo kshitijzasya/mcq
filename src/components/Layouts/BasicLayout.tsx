@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, ReactNode } from "react";
+import "@/css/custom.css";
 
 export default function DefaultLayout({
   children,
