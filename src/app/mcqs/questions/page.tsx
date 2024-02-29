@@ -35,7 +35,7 @@ export default function Questions() {
     useEffect(() => {
         let correctAnswersCount = mcquest.reduce((acc, entry, index) => {
                 let correct = entry.answerOptions.find(v => v?.isCorrect);
-                if (correct?.answer === answers[index]){console.log('acc', acc)
+                if (correct?.answer === answers[index]){
                     return acc + 1;
                 }
                 return acc;
