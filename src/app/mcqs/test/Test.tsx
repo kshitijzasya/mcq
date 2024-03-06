@@ -1,9 +1,9 @@
 "use client";
 import React, {useEffect, useState} from "react"
 import BasicLayout from "@/components/Layouts/BasicLayout";
-import mcquest from "../../../../public/mcqs/nextjs.json"
 
-export default function Questions() {
+
+export default function Test({questions}) {
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [submit, setSubmit] = useState(false);
     const [answers, setAnswers] = useState({})
@@ -11,7 +11,7 @@ export default function Questions() {
 
     const handleNext = () => {
         let nextQuestion = activeQuestion + 1;
-        if (nextQuestion === mcquest.length){
+        if (nextQuestion === questions.length){
             setSubmit(true)
         } else {
             setActiveQuestion(nextQuestion)
@@ -32,9 +32,8 @@ export default function Questions() {
     }
 
     useEffect(() => {
-        let correctAnswersCount = mcquest.reduce((acc, entry, index) => {
-                let correct = entry.answerOptions.find(v => v?.isCorrect);
-                if (correct?.answer === answers[index]){
+        let correctAnswersCount = questions.reduce((acc, entry, index) => {
+                if (entry.correct === answers[index]){
                     return acc + 1;
                 }
                 return acc;
@@ -51,38 +50,38 @@ export default function Questions() {
                     ?
                     <>
                     <div className="flex flex-col items-start w-full">
-                        <h4 className="mt-10 text-xl text-white/60">Question {activeQuestion + 1} of {mcquest.length}</h4>
+                        <h4 className="mt-10 text-xl text-white/60">Question {activeQuestion + 1} of {questions.length}</h4>
                         <div className="mt-4 text-2xl text-white">
                             {/* What type of framework is Next.js? */}
-                            {mcquest[activeQuestion].question}
+                            {questions[activeQuestion].question}
                         </div>
                     </div>
 
                     <div className="flex flex-col w-full">
-                    {mcquest[activeQuestion].answerOptions.map((answer, index) => (
+                    {questions[activeQuestion].answers.map((answer, index) => (
                         <div
                             key={index}
                             className="flex items-center w-full py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer bg-white/5 border-white/10 rounded-xl"
-                            onClick={(e) => handleAnswer(answer.answer)}
+                            onClick={(e) => handleAnswer(answer.key)}
                             >
-                                <input onChange={(e) => handleAnswer(answer.answer)} type="radio" className="w-6 h-6 bg-black" 
+                                <input onChange={(e) => handleAnswer(answer.key)} type="radio" className="w-6 h-6 bg-black" 
                                 checked={
-                                    answer.answer === answers[activeQuestion]
+                                    answer.val === answers[activeQuestion]
                                 }
                                 />
-                                <p className="ml-6 text-white">{answer.answer}</p>
+                                <p className="ml-6 text-white">{answer.val}</p>
                             </div>
                         ))}
                     </div>
                     <div className="flex justify-between w-full mt-4 text-white">
                         <button onClick={handlePrevious}  className="w-[49%] py-3 bg-indigo-600 rounded-lg">Previous</button>
-                        <button onClick={handleNext} className="w-[49%] py-3 bg-indigo-600 rounded-lg">{activeQuestion + 1 === mcquest.length ? 'Submit': 'Next'}</button>
+                        <button onClick={handleNext} className="w-[49%] py-3 bg-indigo-600 rounded-lg">{activeQuestion + 1 === questions.length ? 'Submit': 'Next'}</button>
                     </div>
                     </>
                     :
                     <>
                     <h1 className="text-3xl font-semibold text-center text-white">
-                    You scored {score} out of {mcquest.length }
+                    You scored {score} out of {questions.length }
                     </h1>
                     </>
                 }
