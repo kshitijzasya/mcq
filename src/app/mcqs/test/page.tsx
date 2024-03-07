@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react"
 import helpers from "@/helpers/mcq"
 import MCQ from "@/app/mcqs/test/Test"
+import useLocalStorage from "@/hooks/useLocalStorage"
 
 const Loading = () => (
     <>
@@ -14,15 +15,12 @@ const convertPropsDataToQuestionsFormat = questions => {
     for(let key in questions) {
         var entry = {
             'question': questions[key].question,
-            'answers': Object.entries(questions[key].answers).reduce((acc, e) => {
-                if (e[1]) {
-                    acc.push({
-                        key: e[0].split("_")[1],
-                        val : e[1]
-                    })
-                }
-                return acc;
-            }, []),
+            'answers': Object.entries(questions[key].answers)
+                            .filter(([_, val]) =>  val)
+                            .map(([key, value]) => ({
+                                key: key.split("_")[1],
+                                'val': value
+                                })),
             'correct': (function(answers) {
                 for(let k in answers) {
                     if (answers[k] === 'true') {
@@ -36,13 +34,29 @@ const convertPropsDataToQuestionsFormat = questions => {
     return data
 }
 
+const valueByLevel = {
+    "10": "easy",
+    "20": "medium",
+    "30": "hard"
+}
+
 export default function Page() {
+    let [
+        tag,
+        difficulty,
+        level = "10"
+       ] = [
+        localStorage.getItem("tag"),
+        localStorage.getItem("level"),
+        localStorage.getItem("duration")
+    ]
+
     const [questions, setQuestions] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         setLoading(true)
-        helpers.questions()
+        helpers.questions(`tag=${tag}&difficulty=${difficulty}&limit=${level}`)
         .then(values => {
             setQuestions(convertPropsDataToQuestionsFormat(values))
             setLoading(false)

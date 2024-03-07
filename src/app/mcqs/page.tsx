@@ -1,28 +1,37 @@
-import React from "react";
-
+import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import Image from "next/image";
 import { Metadata } from "next";
-import BasicLayout from "@/components/Layouts/BasicLayout";
+import GuestLayout from "@/components/Layouts/GuestLayout";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import Form from "./Form"
 
 export const metadata: Metadata = {
-  title: "Next.js SignIn Page | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js Signin Page TailAdmin Dashboard Template",
+  title: "Mock Test",
+  description:
+    "This page is basically a portal to test your knowledge.",
 };
 
 
+export default function() {
+  return (
+    <GuestLayout>
+      <div className="mx-auto max-w-270">
 
-const Mcqs:React.FC = () => {
-    return (
-        <BasicLayout>
-        <div className="flex flex-col w-screen px-5 h-screen bg-[#1A1A1A] justify-center items-center">
-            <div className="flex flex-col items-start w-full">
-                <h4 className="mt-10 text-xl text-white/60">Question 1 of 5</h4>
-                <div className="mt-4 text-2xl text-white">
-                    What type of framework is Next.js?
-                </div>
+        <div className="grid grid-cols-5 gap-8">
+          <div className="col-span-5 xl:col-span-5">
+            <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+              <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
+                <h3 className="font-medium text-black dark:text-white">
+                  Choose your arena for battle
+                </h3>
+              </div>
+              <div className="p-7">
+                <Form />
+              </div>
             </div>
+          </div>
         </div>
-        </BasicLayout>
-    );
-}
-
-export default Mcqs;
+      </div>
+    </GuestLayout>
+  );
+};

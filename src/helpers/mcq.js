@@ -1,15 +1,28 @@
 import api from "@/util/api"
 
 const apiInterface = {
-    questions: function() {
+    questions: function(query = "") {
         return new Promise(function(resolve, reject) {
-                api('get')
+            (
+                query.length ? api('custom', 'questions', query): api('get')
+            )
                     .then(res => resolve(res))
                     .catch(err => resolve([]))
         })
     },
     tags: function() {
-        return {}
+        return new Promise(function(resolve, reject) {
+            api('custom', 'tags','')
+                .then(tags => resolve(tags))
+                .catch(err => resolve([]))
+        })
+    },
+    categories: function() {
+        return new Promise(function(resolve, reject) {
+            api('custom', 'categories', '')
+                .then(tags => resolve(tags))
+                .catch(err => resolve([]))
+        })
     }
 }
 
