@@ -17,7 +17,7 @@ const durations: Array<{name: string}> = [
     {name: "30"}
 ]
 
-const Form = (): JSX.Element => {
+const Form : React.FC = () => {
     const router = useRouter();
     const [tags, setTags] = useState([])
     const [selectedTag, setSelectedTag] = useState<string>("")

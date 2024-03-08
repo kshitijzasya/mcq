@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 
-const Mcqs = () => {
+const Mcqs: React.FC = () => {
   return (
     <GuestLayout>
       <div className="mx-auto max-w-270">
