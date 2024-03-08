@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import { useRouter } from 'next/navigation';
 import SelectGroupCustom from "@/components/SelectGroup/SelectGroupCustom";
 import helpers from "@/helpers/mcq"
-import useLocalStorage from "@/hooks/useLocalStorage"
+// import useLocalStorage from "@/hooks/useLocalStorage"
 
 const allLevels:  Array<{name: string}> = [
     {name: "easy"},
