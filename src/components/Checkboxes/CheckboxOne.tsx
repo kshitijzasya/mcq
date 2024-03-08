@@ -1,21 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const CheckboxOne = () => {
+interface CheckBoxProps {
+  val: string;
+  answer: {key: string, val: string};
+  checked: boolean;
+  handleSelected: (value: any) => void
+}
+
+const CheckboxOne: React.FC<CheckBoxProps> = ({val, answer, checked, handleSelected}) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  useEffect(() => setIsChecked(checked), []);
 
   return (
     <div>
       <label
-        htmlFor="checkboxLabelOne"
+        htmlFor={`checkboxLabelOne-${val}`}
         className="flex cursor-pointer select-none items-center"
       >
         <div className="relative">
           <input
             type="checkbox"
-            id="checkboxLabelOne"
+            id={`checkboxLabelOne-${val}`}
             className="sr-only"
-            onChange={() => {
+            onChange={(e) => {
+              e.preventDefault()
               setIsChecked(!isChecked);
+              handleSelected(answer.key)
             }}
           />
           <div
@@ -28,7 +39,7 @@ const CheckboxOne = () => {
             ></span>
           </div>
         </div>
-        Checkbox Text
+        {answer?.val}
       </label>
     </div>
   );

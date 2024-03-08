@@ -1,6 +1,7 @@
 "use client";
 import React, {useEffect, useState} from "react"
-import BasicLayout from "@/components/Layouts/BasicLayout";
+import GuestLayout from "@/components/Layouts/GuestLayout";
+import CheckboxOne from "@/components/Checkboxes/CheckboxOne";
 
 
 export default function Test({questions}) {
@@ -27,7 +28,7 @@ export default function Test({questions}) {
     }
 
     const handleAnswer = answer => {
-        setAnswers({...answers, [activeQuestion]: answer })
+        setAnswers({...answers, [activeQuestion]: answer });
         handleNext();
     }
 
@@ -44,50 +45,66 @@ export default function Test({questions}) {
 
     // Component
     return (
-        <BasicLayout>
-            <div className="flex flex-col w-screen px-5 h-screen bg-[#1A1A1A] justify-center items-center">
-                {
-                    !submit
-                    ?
-                    <>
-                    <div className="flex flex-col items-start w-full">
-                        <h4 className="mt-10 text-xl text-white/60">Question {activeQuestion + 1} of {questions.length}</h4>
-                        <div className="mt-4 text-2xl text-white">
-                            {/* What type of framework is Next.js? */}
-                            {questions[activeQuestion].question}
-                        </div>
-                    </div>
+        <GuestLayout>
+            <div className="mx-auto max-w-270">
 
-                    <div className="flex flex-col w-full">
-                    {questions[activeQuestion].answers.map((answer, index) => (
-                        <div
-                            key={index}
-                            className="flex items-center w-full py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer bg-white/5 border-white/10 rounded-xl"
-                            onClick={(e) => handleAnswer(answer.key)}
-                            >
-                                <input onChange={(e) => handleAnswer(answer.key)} type="radio" className="w-6 h-6 bg-black" 
-                                checked={
-                                    answer.val === answers[activeQuestion]
-                                }
-                                />
-                                <p className="ml-6 text-white">{answer.val}</p>
+                <div className="grid grid-cols-5 gap-8">
+                    <div className="col-span-5 xl:col-span-5">
+                        {
+                            !submit
+                            ?
+                            <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                            <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
+                                <h3 className="font-medium text-black dark:text-white text-center">
+                                    Question {activeQuestion + 1} of {questions.length}
+                                </h3>
                             </div>
-                        ))}
+                            <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
+                                <h3 className="font-medium text-black dark:text-white text-left">
+                                    {questions[activeQuestion].question}
+                                </h3>
+                            </div>
+                            <div className="p-7">
+                            {questions[activeQuestion].answers.map((answer, index) => (
+                                <div
+                                    key={`${activeQuestion}${index}`}
+                                    data-type={`${activeQuestion}${index}`}
+                                    className="flex items-center w-full py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer bg-white/5 border-white/10 rounded-xl"
+                                    // onClick={(e) => handleAnswer(answer.key)}
+                                    >
+                                        {/* <input onChange={(e) => handleAnswer(answer.key)} type="radio" className="w-6 h-6 bg-black" 
+                                        checked={
+                                            answer.val === answers[activeQuestion]
+                                        }
+                                        />
+                                        <p className="ml-6 text-black">{answer.val}</p> */}
+                                        <CheckboxOne 
+                                            val={`${activeQuestion}${index}`} 
+                                            checked={answer.key === answers[activeQuestion]}
+                                            answer={answer} 
+                                            handleSelected={ansKey => handleAnswer(ansKey)}
+                                            />
+                                    </div>
+                                ))}
+                                <div className="flex justify-between w-full mt-4 text-white">
+                                    <button onClick={handlePrevious}  className="w-[49%] py-3 bg-indigo-600 rounded-lg">Previous</button>
+                                    <button onClick={handleNext} className="w-[49%] py-3 bg-indigo-600 rounded-lg">{activeQuestion + 1 === questions.length ? 'Submit': 'Next'}</button>
+                                </div>
+                            </div>
+                        </div>
+                            :
+                            <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                                <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
+                                    <h3 className="font-medium text-black text-center text-xl dark:text-white">
+                                    You scored {score} out of {questions.length }
+                                    </h3>
+                                </div>
+                            </div>
+                        }
+                        
                     </div>
-                    <div className="flex justify-between w-full mt-4 text-white">
-                        <button onClick={handlePrevious}  className="w-[49%] py-3 bg-indigo-600 rounded-lg">Previous</button>
-                        <button onClick={handleNext} className="w-[49%] py-3 bg-indigo-600 rounded-lg">{activeQuestion + 1 === questions.length ? 'Submit': 'Next'}</button>
-                    </div>
-                    </>
-                    :
-                    <>
-                    <h1 className="text-3xl font-semibold text-center text-white">
-                    You scored {score} out of {questions.length }
-                    </h1>
-                    </>
-                }
-
+                </div>
             </div>
-        </BasicLayout>
+        </GuestLayout>
     )
 }
