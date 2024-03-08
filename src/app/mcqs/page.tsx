@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 
-export default function Mcqs() {
+const Mcqs = () => {
   return (
     <GuestLayout>
       <div className="mx-auto max-w-270">
@@ -35,3 +35,7 @@ export default function Mcqs() {
     </GuestLayout>
   );
 };
+
+Mcqs.displayName = "Mcqs";
+
+export default Mcqs;

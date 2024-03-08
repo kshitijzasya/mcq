@@ -17,7 +17,7 @@ const durations: Array<{name: string}> = [
     {name: "30"}
 ]
 
-export default function Form(): JSX.Element {
+const Form = (): JSX.Element => {
     const router = useRouter();
     const [tags, setTags] = useState([])
     const [selectedTag, setSelectedTag] = useState<string>("")
@@ -58,18 +58,18 @@ export default function Form(): JSX.Element {
             <form action="#" onSubmit={e => handleSubmit(e)}>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
-                        <SelectGroupCustom label={'Tag'} options={tags} onSelect={(v: any) => setSelectedTag(v)}/>
+                        <SelectGroupCustom label={'Tag'} options={tags as any[]} onSelect={(v: any) => setSelectedTag(v)}/>
                     </div>
                     {/* <div className="w-full sm:w-1/2">
                         <SelectGroupCustom  label={'category'} options={categories} onSelect={selectCategory}/>
                     </div> */}
                     <div className="w-full sm:w-1/2">
-                        <SelectGroupCustom  label={'Difficulty'} options={allLevels} onSelect={(v: any) => setLevel(v)}/>
+                        <SelectGroupCustom  label={'Difficulty'} options={allLevels as any[]} onSelect={(v: any) => setLevel(v)}/>
                     </div>
                   </div>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
-                            <SelectGroupCustom  label={'Duration (min)'} options={durations} onSelect={(d: any) => setDuration(d)}/>
+                            <SelectGroupCustom  label={'Duration (min)'} options={durations as any[]} onSelect={(d: any) => setDuration(d)}/>
                         </div>
                   </div>
 
@@ -92,3 +92,7 @@ export default function Form(): JSX.Element {
         </>
     )
 }
+
+Form.displayName = 'Form';
+
+export default Form;
