@@ -8,13 +8,9 @@ services:
     environment:
       - NODE_ENV=development
       - WATCHPACK_POLLING=true
-      - USER_ID=${USER_ID}
-      - GROUP_ID=${GROUP_ID}
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
     ports:
       - "3000:3000"
-    # Use environment variables for user and group IDs
-    user: "${USER_ID}:${GROUP_ID}"

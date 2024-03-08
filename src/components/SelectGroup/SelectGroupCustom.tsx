@@ -1,7 +1,13 @@
 "use client";
 import React, { useState } from "react";
 
-const SelectGroupCustom: React.FC = ({label, options, onSelect}) => {
+interface SelectGroupCustomProps {
+  label: string;
+  options: {name:string}[];
+  onSelect: (value: string) => void
+}
+
+const SelectGroupCustom: React.FC<SelectGroupCustomProps> = ({label, options, onSelect}) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
 

@@ -2,7 +2,13 @@
 import React, {useEffect, useState} from "react"
 import helpers from "@/helpers/mcq"
 import MCQ from "@/app/mcqs/test/Test"
-import useLocalStorage from "@/hooks/useLocalStorage"
+// import useLocalStorage from "@/hooks/useLocalStorage"
+
+interface QuestionEntry {
+    question: string;
+    answers: {key:  string; val: string}[];
+    correct: string
+}
 
 const Loading = () => (
     <>
@@ -10,16 +16,16 @@ const Loading = () => (
             </>
 )
 
-const convertPropsDataToQuestionsFormat = questions => {
-    var data = [];
+const convertPropsDataToQuestionsFormat = (questions: any): QuestionEntry[] => {
+    var data : QuestionEntry[]= [];
     for(let key in questions) {
-        var entry = {
+        var entry: QuestionEntry = {
             'question': questions[key].question,
             'answers': Object.entries(questions[key].answers)
                             .filter(([_, val]) =>  val)
                             .map(([key, value]) => ({
-                                key: key.split("_")[1],
-                                'val': value
+                                'key': key.split("_")[1],
+                                'val': value as string
                                 })),
             'correct': (function(answers) {
                 for(let k in answers) {
@@ -27,6 +33,7 @@ const convertPropsDataToQuestionsFormat = questions => {
                         return k.split("_")[1]
                     }
                 }
+                return "";
             })(questions[key].correct_answers)
         };
         data.push(entry)
@@ -51,7 +58,7 @@ export default function Page() {
         localStorage.getItem("duration")
     ]
 
-    const [questions, setQuestions] = useState([])
+    const [questions, setQuestions] = useState<QuestionEntry[]>([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -61,6 +68,7 @@ export default function Page() {
             setQuestions(convertPropsDataToQuestionsFormat(values))
             setLoading(false)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     if (loading) {
         return <Loading />

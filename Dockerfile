@@ -12,11 +12,11 @@ ENV NODE_ENV=development
 # WORKDIR /app
 # RUN chown node:node
 # USER node
-# COPY package*.json ./
-# COPY -from=builder /app/.next ./.next
-# COPY -from=builder /app/public ./public
-# COPY -from=builder /app/.env ./.env
-# COPY -from=builder /app/node_modules/ ./node_modules/
+COPY package*.json ./
+COPY -from=builder /app/ ./
+# COPY -from=builder /app/public ./
+# COPY -from=builder /app/.env ./
+# COPY -from=builder /app/node_modules/ ./
 
 EXPOSE 3000
 CMD ["npm", "run", "dev"]

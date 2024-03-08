@@ -39,6 +39,7 @@ export default function Test({questions}) {
                 return acc;
         }, 0);
         setScore(correctAnswersCount)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [submit])
 
     // Component
