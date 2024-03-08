@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 
-const McqsPage: React.FC = () => {
+const Mcqs: React.FC = () => {
   return (
     <GuestLayout>
       <div className="mx-auto max-w-270">
@@ -36,6 +36,6 @@ const McqsPage: React.FC = () => {
   );
 };
 
-McqsPage.displayName = "McqsPage"; // Add displayName property
+Mcqs.displayName = "Mcqs"; // Add displayName property
 
-export default McqsPage;
+export default Mcqs;
