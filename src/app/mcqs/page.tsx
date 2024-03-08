@@ -1,8 +1,8 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import Image from "next/image";
+// import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+// import Image from "next/image";
 import { Metadata } from "next";
 import GuestLayout from "@/components/Layouts/GuestLayout";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
+// import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import McqForm from "./Form"
 
 export const metadata: Metadata = {
@@ -36,6 +36,6 @@ const Mcqs: React.FC = () => {
   );
 };
 
-Mcqs.displayName = "Mcqs";
+Mcqs.displayName = "Mcqs"; // Add displayName property
 
 export default Mcqs;
