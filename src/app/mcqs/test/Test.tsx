@@ -1,7 +1,7 @@
 "use client";
 import React, {useEffect, useState} from "react"
 import GuestLayout from "@/components/Layouts/GuestLayout";
-import CheckboxOne from "@/components/Checkboxes/CheckboxOne";
+import CheckboxCustom from "@/components/Checkboxes/CheckboxCustom";
 
 
 export default function Test({questions}) {
@@ -78,7 +78,7 @@ export default function Test({questions}) {
                                         }
                                         />
                                         <p className="ml-6 text-black">{answer.val}</p> */}
-                                        <CheckboxOne 
+                                        <CheckboxCustom 
                                             val={`${activeQuestion}${index}`} 
                                             checked={answer.key === answers[activeQuestion]}
                                             answer={answer} 
