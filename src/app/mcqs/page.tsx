@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import GuestLayout from "@/components/Layouts/GuestLayout";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import Form from "./Form"
+import McqForm from "./Form"
 
 export const metadata: Metadata = {
   title: "Mock Test",
@@ -26,7 +26,7 @@ const Mcqs: React.FC = () => {
                 </h3>
               </div>
               <div className="p-7">
-                <Form />
+                <McqForm />
               </div>
             </div>
           </div>

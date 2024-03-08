@@ -17,7 +17,7 @@ const durations: Array<{name: string}> = [
     {name: "30"}
 ]
 
-const Form : React.FC = () => {
+const McqForm : React.FC = () => {
     const router = useRouter();
     const [tags, setTags] = useState([])
     const [selectedTag, setSelectedTag] = useState<string>("")
@@ -90,6 +90,6 @@ const Form : React.FC = () => {
     )
 }
 
-Form.displayName = 'Form';
+McqForm.displayName = 'McqForm';
 
-export default Form;
+export default McqForm;
