@@ -27,9 +27,6 @@ const Form = (): JSX.Element => {
     const handleSubmit = e => {
         localStorage.clear();
         e.preventDefault();
-        // useLocalStorage("tag", selectedTag)
-        // useLocalStorage("duration", duration)
-        // useLocalStorage("level", level)
         localStorage.setItem("tag", selectedTag)
         localStorage.setItem("duration", duration)
         localStorage.setItem("level", level)
@@ -69,8 +66,8 @@ const Form = (): JSX.Element => {
                   </div>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
-                            <SelectGroupCustom  label={'Duration (min)'} options={durations as any[]} onSelect={(d: any) => setDuration(d)}/>
-                        </div>
+                        <SelectGroupCustom  label={'Duration (min)'} options={durations as any[]} onSelect={(d: any) => setDuration(d)}/>
+                    </div>
                   </div>
 
 
