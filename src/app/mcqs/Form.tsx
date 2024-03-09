@@ -3,32 +3,28 @@ import React, {useState, useEffect} from "react";
 import { useRouter } from 'next/navigation';
 import SelectGroupCustom from "@/components/SelectGroup/SelectGroupCustom";
 import helpers from "@/helpers/mcq"
+import data from "../../../public/mcqs/data.json"
 // import useLocalStorage from "@/hooks/useLocalStorage"
 
-const allLevels:  Array<{name: string}> = [
-    {name: "easy"},
-    {name: "medium"},
-    {name: "hard"}
-]
-
-const durations: Array<{name: string}> = [
-    {name: "10"},
-    {name: "20"},
-    {name: "30"}
-]
+interface TagInterface {
+    id: number,
+    name: string
+  }
 
 const McqForm : React.FC = () => {
     const router = useRouter();
-    const [tags, setTags] = useState([])
+    const [tags, setTags] = useState<TagInterface[]>([])
+  
+
     const [selectedTag, setSelectedTag] = useState<string>("")
-    const [duration, setDuration] = useState<string>("")
+    const [duration, setDuration] = useState<number>(0)
     const [level, setLevel] = useState<string>("")
 
     const handleSubmit = e => {
         localStorage.clear();
         e.preventDefault();
         localStorage.setItem("tag", selectedTag)
-        localStorage.setItem("duration", duration)
+        localStorage.setItem("duration", duration.toString())
         localStorage.setItem("level", level)
         router.push('/mcqs/test',{
                 scroll: false
@@ -36,18 +32,10 @@ const McqForm : React.FC = () => {
     }
 
     useEffect(() => {
-        Promise.allSettled([
-            helpers.tags(), 
-            // helpers.categories()
-        ])
-            .then((res) => ({
-                'tags':  res[0]
-            }))
-            .then(result => {
-                if (result.tags.status === "fulfilled") {
-                    setTags(result.tags.value)
-                }
-            })
+      //Setting tags
+      if (data.tags.length) {
+          setTags(data.tags)
+      }
     },[]);
 
     return (
@@ -61,12 +49,12 @@ const McqForm : React.FC = () => {
                         <SelectGroupCustom  label={'category'} options={categories} onSelect={selectCategory}/>
                     </div> */}
                     <div className="w-full sm:w-1/2">
-                        <SelectGroupCustom  label={'Difficulty'} options={allLevels as any[]} onSelect={(v: any) => setLevel(v)}/>
+                        <SelectGroupCustom  label={'Difficulty'} options={data.difficulty as any[]} onSelect={(v: any) => setLevel(v)}/>
                     </div>
                   </div>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
-                        <SelectGroupCustom  label={'Duration (min)'} options={durations as any[]} onSelect={(d: any) => setDuration(d)}/>
+                        <SelectGroupCustom  label={'Duration (min)'} options={data.durations as any[]} onSelect={(d: any) => setDuration(parseInt(d) * 2)}/>
                     </div>
                   </div>
 

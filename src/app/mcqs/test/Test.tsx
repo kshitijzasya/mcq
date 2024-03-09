@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react"
 import GuestLayout from "@/components/Layouts/GuestLayout";
 import CheckboxCustom from "@/components/Checkboxes/CheckboxCustom";
+import ScoreCard from "../score/Card";
 
 
 export default function Test({questions}) {
@@ -93,13 +94,7 @@ export default function Test({questions}) {
                             </div>
                         </div>
                             :
-                            <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-                                <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
-                                    <h3 className="font-medium text-black text-center text-xl dark:text-white">
-                                    You scored {score} out of {questions.length }
-                                    </h3>
-                                </div>
-                            </div>
+                            <ScoreCard score={score} total={questions.length}/>
                         }
                         
                     </div>

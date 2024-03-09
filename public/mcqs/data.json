@@ -1,0 +1,184 @@
+{
+    "tags": [
+        {
+            "id": 1,
+            "name": "Linux"
+        },
+        {
+            "id": 2,
+            "name": "BASH"
+        },
+        {
+            "id": 3,
+            "name": "PHP"
+        },
+        {
+            "id": 4,
+            "name": "Docker"
+        },
+        {
+            "id": 5,
+            "name": "HTML"
+        },
+        {
+            "id": 6,
+            "name": "Undefined"
+        },
+        {
+            "id": 7,
+            "name": "React"
+        },
+        {
+            "id": 8,
+            "name": "Python"
+        },
+        {
+            "id": 9,
+            "name": "Node.js"
+        },
+        {
+            "id": 10,
+            "name": "postgres"
+        },
+        {
+            "id": 11,
+            "name": "Css"
+        },
+        {
+            "id": 12,
+            "name": "AI"
+        },
+        {
+            "id": 13,
+            "name": "C"
+        },
+        {
+            "id": 14,
+            "name": "Java"
+        },
+        {
+            "id": 15,
+            "name": "AWS"
+        },
+        {
+            "id": 16,
+            "name": "Angular"
+        },
+        {
+            "id": 17,
+            "name": "Swift"
+        },
+        {
+            "id": 18,
+            "name": "MySQL"
+        },
+        {
+            "id": 19,
+            "name": "Git"
+        },
+        {
+            "id": 20,
+            "name": "React"
+        },
+        {
+            "id": 22,
+            "name": "Blockchain"
+        },
+        {
+            "id": 23,
+            "name": "VueJS"
+        },
+        {
+            "id": 24,
+            "name": "WordPress"
+        },
+        {
+            "id": 25,
+            "name": ".Net"
+        },
+        {
+            "id": 26,
+            "name": "VsCode"
+        },
+        {
+            "id": 27,
+            "name": "Laravel"
+        },
+        {
+            "id": 28,
+            "name": "Kubernetes"
+        },
+        {
+            "id": 30,
+            "name": "Ruby"
+        },
+        {
+            "id": 31,
+            "name": "JavaScript"
+        },
+        {
+            "id": 32,
+            "name": "DevOps"
+        },
+        {
+            "id": 33,
+            "name": "dev"
+        },
+        {
+            "id": 34,
+            "name": "Python"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "Linux"
+        },
+        {
+            "id": 2,
+            "name": "bash"
+        },
+        {
+            "id": 3,
+            "name": "uncategorized"
+        },
+        {
+            "id": 4,
+            "name": "Docker"
+        },
+        {
+            "id": 5,
+            "name": "SQL"
+        },
+        {
+            "id": 6,
+            "name": "CMS"
+        },
+        {
+            "id": 7,
+            "name": "Code"
+        },
+        {
+            "id": 8,
+            "name": "DevOps"
+        }
+    ],
+    "difficulty": [
+       {
+        "name":  "easy"
+       },
+       {
+        "name":  "medium"
+       },
+       {
+        "name":  "hard"
+       }
+    ],
+    "durations": [
+        {"name": 5},
+        {"name": 10},
+        {"name": 15},
+        {"name": 20},
+        {"name": 30}
+    ]
+}

@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react"
 import helpers from "@/helpers/mcq"
 import MCQ from "@/app/mcqs/test/Test"
+import Loader from "@/components/common/Loader"
 // import useLocalStorage from "@/hooks/useLocalStorage"
 
 interface QuestionEntry {
@@ -9,12 +10,6 @@ interface QuestionEntry {
     answers: {key:  string; val: string}[];
     correct: string
 }
-
-const Loading = () => (
-    <>
-            <h2>Page loading</h2>
-            </>
-)
 
 const convertPropsDataToQuestionsFormat = (questions: any): QuestionEntry[] => {
     var data : QuestionEntry[]= [];
@@ -71,7 +66,7 @@ export default function Page() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     if (loading) {
-        return <Loading />
+        return <Loader />
     }
     return <MCQ questions={questions} />
 }
