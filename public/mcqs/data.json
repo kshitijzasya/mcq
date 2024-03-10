@@ -2,43 +2,33 @@
     "tags": [
         {
             "id": 1,
-            "name": "Linux"
-        },
-        {
-            "id": 2,
-            "name": "BASH"
-        },
-        {
-            "id": 3,
-            "name": "PHP"
+            "name": "PHP",
+            "type": "code"
         },
         {
             "id": 4,
-            "name": "Docker"
+            "name": "Docker",
+            "type": null
         },
         {
             "id": 5,
-            "name": "HTML"
-        },
-        {
-            "id": 6,
-            "name": "Undefined"
-        },
-        {
-            "id": 7,
-            "name": "React"
+            "name": "HTML",
+            "type": "code"
         },
         {
             "id": 8,
-            "name": "Python"
+            "name": "Python",
+            "type": "code"
         },
         {
             "id": 9,
-            "name": "Node.js"
+            "name": "Node.js",
+            "type": "code"
         },
         {
             "id": 10,
-            "name": "postgres"
+            "name": "postgres",
+            "type": "code"
         },
         {
             "id": 11,
@@ -50,43 +40,47 @@
         },
         {
             "id": 13,
-            "name": "C"
+            "name": "C",
+            "type": "code"
         },
         {
             "id": 14,
-            "name": "Java"
+            "name": "Java",
+            "type": "code"
         },
         {
             "id": 15,
-            "name": "AWS"
+            "name": "AWS",
+            "type": null
         },
         {
             "id": 16,
-            "name": "Angular"
+            "name": "Angular",
+            "type": "code"
         },
         {
             "id": 17,
-            "name": "Swift"
+            "name": "Swift",
+            "type": "code"
         },
         {
             "id": 18,
-            "name": "MySQL"
+            "name": "MySQL",
+            "type": null
         },
         {
             "id": 19,
             "name": "Git"
         },
         {
-            "id": 20,
-            "name": "React"
-        },
-        {
             "id": 22,
-            "name": "Blockchain"
+            "name": "Blockchain",
+            "type": "code"
         },
         {
             "id": 23,
-            "name": "VueJS"
+            "name": "VueJS",
+            "type": "code"
         },
         {
             "id": 24,

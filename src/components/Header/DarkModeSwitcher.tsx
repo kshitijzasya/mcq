@@ -1,8 +1,16 @@
 import useColorMode from "@/hooks/useColorMode";
+import { useEffect } from "react";
 
 const DarkModeSwitcher = () => {
   const [colorMode, setColorMode] = useColorMode();
-
+  
+  useEffect(() => {
+    const currentHour = (new Date()).getHours() 
+    if (typeof setColorMode === "function") {
+      let  val = (currentHour >= 6 && currentHour < 18) ? "ligh" : "dark"
+      setColorMode(val);
+    }
+  }, []) 
   return (
     <li>
       <label

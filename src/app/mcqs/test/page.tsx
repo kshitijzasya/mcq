@@ -58,10 +58,13 @@ export default function Page() {
 
     useEffect(() => {
         setLoading(true)
-        helpers.questions(`tag=${tag}&difficulty=${difficulty}&limit=${level}`)
+        helpers.questions(`tags=${tag || ''}&difficulty=${difficulty || ''}&limit=${level || ''}`)
         .then(values => {
             setQuestions(convertPropsDataToQuestionsFormat(values))
             setLoading(false)
+        })
+        .catch(err => {
+            console.log('no questions provided to me', err)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

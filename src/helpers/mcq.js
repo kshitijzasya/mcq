@@ -7,7 +7,7 @@ const apiInterface = {
                 query.length ? api('custom', 'questions', query): api('get')
             )
                     .then(res => resolve(res))
-                    .catch(err => resolve([]))
+                    .catch(err => reject([]))
         })
     },
     tags: function() {

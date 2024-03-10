@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from "react";
 import { useRouter } from 'next/navigation';
 import SelectGroupCustom from "@/components/SelectGroup/SelectGroupCustom";
-import helpers from "@/helpers/mcq"
+// import helpers from "@/helpers/mcq"
 import data from "../../../public/mcqs/data.json"
 // import useLocalStorage from "@/hooks/useLocalStorage"
 

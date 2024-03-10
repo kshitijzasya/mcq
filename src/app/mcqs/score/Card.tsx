@@ -57,6 +57,7 @@ const ScoreCard: React.FC<ScoreCardProps> = ({score, total}) => {
                   width={176}
                   height={32}
                   alt="score"
+                  loading="eager"
                 />
               </div>
             </div>
