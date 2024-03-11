@@ -13,7 +13,6 @@ const SignIn: React.FC = () => {
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Sign In" />
-
       <AuthComponent />
     </DefaultLayout>
   );

@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import ECommerce from "@/components/Dashboard/E-commerce";
 import AuthForm from "@/app/auth/signin/form"
-import { useSession, signIn } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 function Entry() {
     // const router = useRouter();
-    const { data: session, status } = useSession();
+    const { data: session, status } = useSession(); console.log({session, status});
     if (status === "loading"){
         return <p>Hang on there...</p>
     }
