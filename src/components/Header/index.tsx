@@ -1,14 +1,29 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownMessage from "./DropdownMessage";
 import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
+  const {data: session, status, update} = useSession()
+  const router = useRouter()
+  const [loggedUser, setLoggedUser] = useState<object>({})
+
+  useEffect(() => {
+      if(status === "authenticated") {
+          const {user, expires: string = ""} = session;
+          setLoggedUser(user)
+      } else {
+        router.push('/')
+      }
+  },[session, status])
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow justify-end items-center px-4 py-4 shadow-2 md:px-6 2xl:px-11">
@@ -82,7 +97,7 @@ const Header = (props: {
           </ul>
 
           {/* <!-- User Area --> */}
-          <DropdownUser />
+          <DropdownUser user={loggedUser}/>
           {/* <!-- User Area --> */}
         </div>
       </div>

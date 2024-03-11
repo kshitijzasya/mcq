@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react"
 
 function Entry() {
     // const router = useRouter();
-    const { data: session, status } = useSession(); console.log({session, status});
+    const { data: session, status } = useSession();
     if (status === "loading"){
         return <p>Hang on there...</p>
     }

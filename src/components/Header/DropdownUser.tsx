@@ -3,8 +3,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react"
 
-const DropdownUser = () => {
+interface UserProps {
+  user: {
+    name: string,
+    image: string,
+    email: string
+  }
+}
+
+
+
+const DropdownUser: React.FC<UserProps> = ({user}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [image, setImage] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string>("");
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -35,6 +48,12 @@ const DropdownUser = () => {
     return () => document.removeEventListener("keydown", keyHandler);
   });
 
+  useEffect(() => {
+    setImage(user.image)
+    setEmail(user.email)
+    setName(user.name)
+  }, [user])
+
   return (
     <div className="relative">
       <Link
@@ -45,22 +64,26 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {user?.name}
           </span>
-          <span className="block text-xs">UX Designer</span>
+          <span className="block text-xs">{user?.email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <Image
-            width={112}
-            height={112}
-            src={"/images/user/user-01.png"}
-            style={{
-              width: "auto",
-              height: "auto",
-            }}
-            alt="User"
-          />
+          {
+            image &&
+            <Image
+              width={112}
+              height={112}
+              src={user?.image ?? ''}
+              style={{
+                width: "auto",
+                height: "auto",
+              }}
+              className="rounded-full"
+              alt="User"
+            />
+          }
         </span>
 
         <svg
