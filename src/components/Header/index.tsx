@@ -20,7 +20,7 @@ const Header = (props: {
 }) => {
   const {data: session, status, update} = useSession()
   const router = useRouter()
-  const [loggedUser, setLoggedUser] = useState<UserObject | null>(null)
+  const [loggedUser, setLoggedUser] = useState<UserObject>({name:"", image: "", email: ""})
 
   useEffect(() => {
       if(status === "authenticated") {
