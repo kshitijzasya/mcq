@@ -19,7 +19,9 @@ const Header = (props: {
   useEffect(() => {
       if(status === "authenticated") {
           const {user, expires: string = ""} = session;
-          setLoggedUser(user)
+          if(user){
+            setLoggedUser(user)
+          }
       } else {
         router.push('/')
       }
