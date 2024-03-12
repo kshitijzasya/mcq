@@ -71,5 +71,5 @@ export default function Page() {
     if (loading) {
         return <Loader />
     }
-    return <MCQ questions={questions} />
+    return <MCQ questions={questions} minutes={level} />
 }

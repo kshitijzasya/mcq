@@ -3,9 +3,10 @@ import React, {useEffect, useState} from "react"
 import GuestLayout from "@/components/Layouts/GuestLayout";
 import CheckboxCustom from "@/components/Checkboxes/CheckboxCustom";
 import ScoreCard from "../score/Card";
+import AnalogClock from "@/components/Timer/Analog"
 
 
-export default function Test({questions}) {
+export default function Test({questions, minutes}) {
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [submit, setSubmit] = useState(false);
     const [answers, setAnswers] = useState({})
@@ -49,8 +50,8 @@ export default function Test({questions}) {
         <GuestLayout>
             <div className="mx-auto max-w-270">
 
-                <div className="grid grid-cols-5 gap-8">
-                    <div className="col-span-5 xl:col-span-5">
+                <div className="grid grid-cols-6 gap-8">
+                    <div className="col-span-4 xl:col-span-4">
                         {
                             !submit
                             ?
@@ -97,6 +98,9 @@ export default function Test({questions}) {
                             <ScoreCard score={score} total={questions.length}/>
                         }
                         
+                    </div>
+                    <div className="col-span-2 xl:col-span-2 bg-white dark:bg-boxdark">
+                            <AnalogClock minutes={parseInt(minutes) ?? 10}/>
                     </div>
                 </div>
             </div>
