@@ -20,18 +20,22 @@ const Header = (props: {
 }) => {
   const {data: session, status, update} = useSession()
   const router = useRouter()
-  const [loggedUser, setLoggedUser] = useState<UserObject>({name:"", image: "", email: ""})
+  const [loggedUser, setLoggedUser] = useState<UserObject | null>(null)
 
   useEffect(() => {
       if(status === "authenticated") {
           const {user, expires: string = ""} = session;
           if(user){
-            setLoggedUser(user)
+            setLoggedUser({
+              name: user.name ?? "",
+              email: user.email ?? "",
+              image: user.image ?? ""
+            })
           }
       } else {
         router.push('/')
       }
-  },[session, status])
+  },[session, status, router])
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow justify-end items-center px-4 py-4 shadow-2 md:px-6 2xl:px-11">
