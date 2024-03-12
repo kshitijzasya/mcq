@@ -8,13 +8,19 @@ import Image from "next/image";
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation";
 
+interface UserObject{
+  name: string;
+  image: string;
+  email: string
+}
+
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
   const {data: session, status, update} = useSession()
   const router = useRouter()
-  const [loggedUser, setLoggedUser] = useState<object>({})
+  const [loggedUser, setLoggedUser] = useState<UserObject | null>(null)
 
   useEffect(() => {
       if(status === "authenticated") {
@@ -99,7 +105,11 @@ const Header = (props: {
           </ul>
 
           {/* <!-- User Area --> */}
-          <DropdownUser user={loggedUser}/>
+          {
+            loggedUser && (
+              <DropdownUser user={loggedUser}/>
+            )
+          }
           {/* <!-- User Area --> */}
         </div>
       </div>
