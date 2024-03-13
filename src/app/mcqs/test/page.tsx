@@ -1,5 +1,6 @@
 "use client"
 import React, {useEffect, useState} from "react"
+import { useRouter } from "next/navigation";
 import helpers from "@/helpers/mcq"
 import MCQ from "@/app/mcqs/test/Test"
 import Loader from "@/components/common/Loader"
@@ -43,6 +44,7 @@ const valueByLevel = {
 }
 
 export default function Page() {
+    const router = useRouter()
     let [
         tag,
         difficulty,
@@ -54,7 +56,17 @@ export default function Page() {
     ]
 
     const [questions, setQuestions] = useState<QuestionEntry[]>([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+
+    const clearLocalStorage = () => {
+        localStorage.removeItem("tag")
+        localStorage.removeItem("level"),
+        localStorage.removeItem("duration")
+    }
+
+    if (!tag && !difficulty && !level) {
+        router.back()
+    }
 
     useEffect(() => {
         setLoading(true)
@@ -71,5 +83,5 @@ export default function Page() {
     if (loading) {
         return <Loader />
     }
-    return <MCQ questions={questions} minutes={level} />
+    return <MCQ questions={questions} minutes={level} onSubmit={clearLocalStorage}/>
 }

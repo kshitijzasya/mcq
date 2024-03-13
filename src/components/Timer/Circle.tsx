@@ -6,7 +6,6 @@ interface CircleProps {
 }
 
 const Circle= ({color, percentage}: CircleProps) => {
-    console.log('insindeeeeee',{color, percentage})
     return (
         <>
             <div className="flex h-[200px] w-[200px]">
@@ -21,7 +20,7 @@ const Circle= ({color, percentage}: CircleProps) => {
                             strokeWidth="1rem"
                             strokeDasharray="439.8"
                             strokeDashoffset="0"
-                            className="text-white"
+                            className="text-white dark:text-black"
                             > </circle>
                             <circle 
                                 r="70"
@@ -32,7 +31,8 @@ const Circle= ({color, percentage}: CircleProps) => {
                                 strokeWidth="1rem"
                                 strokeDasharray="439.8"
                                 strokeDashoffset={440-(440 * percentage) / 60}
-                                className={`${color}`}
+                                className={`${color} blur-none`}
+                                opacity={0.9}
                             > </circle>
                     </g>
                     <text className="text-xl font-bold" x="50%" y="50%" dominantBaseline={"central"} textAnchor="middle">

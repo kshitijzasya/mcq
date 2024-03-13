@@ -49,7 +49,7 @@ const ScoreCard: React.FC<ScoreCardProps> = ({score, total}) => {
 
         <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5">
-            <div className=" z-30 mx-auto h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
+            <div className=" z-30 mx-auto h-30 w-full max-w-30 rounded-full p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
               <div className=" drop-shadow-2">
                 <Image
                   // src={"/images/score/sad.gif"}
