@@ -5,6 +5,7 @@ import GuestLayout from "@/components/Layouts/GuestLayout";
 import CheckboxCustom from "@/components/Checkboxes/CheckboxCustom";
 import ScoreCard from "../score/Card";
 import AnalogClock from "@/components/Timer/Analog"
+import Warning from "./Warning"
 
 export default function Test({questions, minutes, onSubmit}) {
     const  router = useRouter();
@@ -13,6 +14,7 @@ export default function Test({questions, minutes, onSubmit}) {
     const [answers, setAnswers] = useState({})
     const [score, setScore] = useState(0)
     const [resetClock, setResetClock] = useState(false)
+    const [warning] = useState(true)
 
     const handleNext = () => {
         let nextQuestion = activeQuestion + 1;
@@ -41,6 +43,34 @@ export default function Test({questions, minutes, onSubmit}) {
         setResetClock(true) 
         setSubmit(true)
     }
+
+    useEffect(() => {
+        const handleRefresh = e => {
+            e.preventDefault();
+            localStorage.removeItem("tag")
+            localStorage.removeItem("level"),
+            localStorage.removeItem("duration")
+        }
+
+        const handleReload = (event) => {
+            if (event.ctrlKey || event.metaKey || event.key === 'F5' || event.key === 'r') {
+              event.preventDefault();
+            }
+          };
+        //Disable
+        window.addEventListener('beforeunload', handleRefresh);
+
+        document.addEventListener('contextmenu', (e) => e.preventDefault())
+
+        document.addEventListener('keydown', handleReload)
+
+        return () => {
+            window.removeEventListener('beforeunload', handleRefresh)
+            document.removeEventListener('contextmenu', (e) => e.preventDefault())
+            document.removeEventListener('keydown', handleReload)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(() => {
         
@@ -73,7 +103,6 @@ export default function Test({questions, minutes, onSubmit}) {
                             ?
                 <div className="grid grid-cols-6 gap-8">
                     <div className="col-span-4 xl:col-span-4">
-                        
                             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                                 <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
                                     <h3 className="font-medium text-black dark:text-white text-center">
@@ -117,6 +146,9 @@ export default function Test({questions, minutes, onSubmit}) {
                         
                     </div>
                     <div className="col-span-2 xl:col-span-2 bg-white dark:bg-boxdark">
+                            {
+                                warning && <Warning title="" content="You are not allowed to refresh page!" />
+                            }
                             <AnalogClock minutes={parseInt(minutes) ?? 10} resetClock={resetClock} onComplete={timerCompleted}/>
                     </div>
                 </div>

@@ -1,24 +1,37 @@
 "use client"
 import React from "react";
-import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import ECommerce from "@/components/Dashboard/E-commerce";
+import Dashboard from "@/app/dashboard";
+import Ecommerce from "@/components/Dashboard/E-commerce";
 import AuthForm from "@/app/auth/signin/form"
 import { useSession } from "next-auth/react"
+import GuestLayout from "@/components/Layouts/GuestLayout";
 
 function Entry() {
-    // const router = useRouter();
+    const searchParams = useSearchParams()
+
+    const type: string|null = searchParams.get('type')
+
     const { data: session, status } = useSession();
     if (status === "loading"){
         return <p>Hang on there...</p>
     }
 
     if (status === "authenticated"){
-        return (
+        if (type === 'full'){
+            return (
                 <DefaultLayout>
-                    <ECommerce />
+                    <Ecommerce />
                 </DefaultLayout>
-        )
+            )
+        } else {
+            return (
+                <GuestLayout>
+                    <Dashboard />
+                </GuestLayout>
+            )
+        }
     }
     
     return <AuthForm />
