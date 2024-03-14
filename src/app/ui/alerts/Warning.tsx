@@ -1,11 +1,4 @@
-"use client"
-import React from "react";
-interface WarningProps {
-    title: string,
-    content: string
-}
-
-const Warning: React.FC<WarningProps> = ({title, content}) => {
+const Warning = () => {
     return (
         <div className="flex w-full border-l-6 border-warning bg-warning bg-opacity-[15%] px-7 py-8 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
             <div className="mr-5 flex h-9 w-9 items-center justify-center rounded-lg bg-warning bg-opacity-30">
@@ -24,10 +17,12 @@ const Warning: React.FC<WarningProps> = ({title, content}) => {
             </div>
             <div className="w-full">
               <h5 className="mb-3 text-lg font-semibold text-[#9D5425]">
-                {title}
+                Attention needed
               </h5>
               <p className="leading-relaxed text-[#D0915C]">
-                {content}
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry&apos;s standard
+                dummy text ever since the 1500s, when
               </p>
             </div>
           </div>
