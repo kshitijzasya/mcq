@@ -2,6 +2,8 @@
 import React, { useState, ReactNode } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer/index";
+import Script from "next/script";
 
 export default function GuestLayout({
   children,
@@ -28,11 +30,14 @@ export default function GuestLayout({
             <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
               {children}
             </div>
+
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
         </div>
         {/* <!-- ===== Content Area End ===== --> */}
       </div>
+
+      <Footer />
       {/* <!-- ===== Page Wrapper End ===== --> */}
     </>
   );
