@@ -6,6 +6,7 @@ import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
 import { SessionProvider } from 'next-auth/react';
+import EntryMiddleware from "./Entry/middleware"
 
 export default function RootLayout({
   children
@@ -14,8 +15,6 @@ export default function RootLayout({
 }>) {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-
-  // const pathname = usePathname();
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -26,7 +25,7 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
           <SessionProvider>
-                {loading ? <Loader /> : children}
+                {loading ? <Loader /> : <EntryMiddleware>{children}</EntryMiddleware>}
             </SessionProvider>
         </div>
       </body>

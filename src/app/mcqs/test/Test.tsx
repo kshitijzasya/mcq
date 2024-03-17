@@ -7,7 +7,7 @@ import ScoreCard from "../score/Card";
 import AnalogClock from "@/components/Timer/Analog"
 import Warning from "./Warning"
 
-export default function Test({questions, minutes, onSubmit}) {
+export default function Test({parent, questions, minutes, onSubmit}) {
     const  router = useRouter();
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [submit, setSubmit] = useState(false);
@@ -96,7 +96,7 @@ export default function Test({questions, minutes, onSubmit}) {
 
     // Component
     return (
-        <GuestLayout>
+        <GuestLayout header={parent}>
             <div className="mx-auto max-w-270">
             {
                             !submit

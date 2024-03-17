@@ -44,7 +44,7 @@ const valueByLevel = {
 }
 
 export default function Page() {
-    const router = useRouter()
+    const router = useRouter();console.log(window.location)
     let [
         tag,
         difficulty,
@@ -64,9 +64,7 @@ export default function Page() {
         localStorage.removeItem("duration")
     }
 
-    if (!tag && !difficulty && !level) {
-        router.back()
-    }
+    
 
     useEffect(() => {
         setLoading(true)
@@ -83,5 +81,5 @@ export default function Page() {
     if (loading) {
         return <Loader />
     }
-    return <MCQ parent={true} questions={questions} minutes={level} onSubmit={clearLocalStorage}/>
+    return <MCQ questions={questions} minutes={level} onSubmit={clearLocalStorage}/>
 }

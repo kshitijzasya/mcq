@@ -27,8 +27,8 @@ const Footer: React.FC = () => {
                             className="flex flex-col "
                             style={PopUpStyle}
                             >
-                            <span className="flex items-center justify-center"><Love />Thanks </span>
-                            <span>Scan and pay for my book</span>
+                            <span className="flex items-center justify-center"><Love /> &nbsp;Thanks </span>
+                            <span>Scan and buy me a book</span>
                             <Image
                                 width={176}
                                 height={32}

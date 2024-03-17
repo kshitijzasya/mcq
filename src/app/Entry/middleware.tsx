@@ -1,40 +1,53 @@
 "use client"
 import React from "react";
-import { useSearchParams } from 'next/navigation';
+import {  useSearchParams } from 'next/navigation';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Dashboard from "@/app/dashboard";
 import Ecommerce from "@/components/Dashboard/E-commerce";
 import AuthForm from "@/app/auth/signin/form"
-import { useSession } from "next-auth/react"
 import GuestLayout from "@/components/Layouts/GuestLayout";
+import IsAuthenticated from "./IsAuthenticated"
+import routes from "@/helpers/routes"
 
-function Entry() {
-    const searchParams = useSearchParams()
-
+function Entry({children}) {
+    const searchParams = useSearchParams(); 
     const type: string|null = searchParams.get('type')
 
-    const { data: session, status } = useSession();
-    if (status === "loading"){
-        return <p>Hang on there...</p>
-    }
+    const Authenticated = IsAuthenticated()
 
-    if (status === "authenticated"){
-        if (type === 'full'){
+    //Cases for authenticated routes
+    if(!Authenticated){
+        //Check if routes are in valid unprotected routes
+        if (routes.inProtecedRoutes(window.location.pathname)) {
             return (
-                <DefaultLayout>
-                    <Ecommerce />
-                </DefaultLayout>
-            )
-        } else {
-            return (
-                <GuestLayout>
-                    <Dashboard />
-                </GuestLayout>
+                <>
+                {children}
+                </>
             )
         }
+        return <AuthForm />
+    }
+
+
+    //Cases for authenticated users
+    if (children) {
+        return <>{children}</>
+    }
+
+    if (type === 'full'){
+        return (
+            <DefaultLayout>
+                <Ecommerce />
+            </DefaultLayout>
+        )
+    } else {
+        return (
+            <GuestLayout>
+                <Dashboard />
+            </GuestLayout>
+        )
     }
     
-    return <AuthForm />
 }
 
 export default Entry;
