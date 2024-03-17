@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image"
 import Donate from "./Donate"
 import Love from "./Love"
+import ContactForm from "./ContactForm";
 
+const PopUpStyle: React.CSSProperties  =  {position: 'absolute', bottom: '55px', zIndex: 100};
 
 const Footer: React.FC = () => {
     const [showCode, setShowCode] = useState<boolean>(false)
+    const [showContactForm, setContactForm]= useState<boolean>(false)
     const handleDonate = e => {
         setShowCode(!showCode)
     }
@@ -22,7 +25,7 @@ const Footer: React.FC = () => {
                     (
                         <div 
                             className="flex flex-col "
-                            style={{position: 'absolute', bottom: '55px', zIndex: 100}}
+                            style={PopUpStyle}
                             >
                             <span className="flex items-center justify-center"><Love />Thanks </span>
                             <span>Scan and pay for my book</span>
@@ -38,13 +41,15 @@ const Footer: React.FC = () => {
                     :
                     ''
                 }
-          <ul className="flex items-center gap-2 2xsm:gap-4">
-          <li onClick={handleDonate} className="cursor-pointer">
                 
-                <Donate />
+          <ul className="flex items-center gap-2 2xsm:gap-4">
+          <li >
+                <span onClick={handleDonate} className="cursor-pointer"><Donate /></span>
+                
             </li>
-            <li>
-                <span>Contact Us</span>
+            <li >
+                <ContactForm  show={showContactForm} css={PopUpStyle}/>
+                <span onClick={e => setContactForm(true)} className="cursor-pointer">Contact Us</span>
             </li>
             <li>
                 <span>All Rights reserved with Kshitij Sharma</span>
