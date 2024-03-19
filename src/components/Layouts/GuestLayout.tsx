@@ -7,7 +7,7 @@ import Script from "next/script";
 
  function GuestLayout({
   children,
-  showHeader
+  showHeader = true
 }: {
   children: React.ReactNode;
   showHeader: boolean
@@ -45,10 +45,6 @@ import Script from "next/script";
       {/* <!-- ===== Page Wrapper End ===== --> */}
     </>
   );
-}
-
-GuestLayout.defaultProps = {
-  showHeader: true
 }
 
 export default GuestLayout;
