@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const Mcqs: React.FC = () => {
   return (
-    <GuestLayout>
+    <GuestLayout showHeader={true}>
       <div className="mx-auto max-w-270">
 
         <div className="grid grid-cols-5 gap-8">

@@ -1,9 +1,10 @@
 "use client"
 import React, {useEffect, useState} from "react"
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from 'next/navigation';
 import helpers from "@/helpers/mcq"
 import MCQ from "@/app/mcqs/test/Test"
 import Loader from "@/components/common/Loader"
+import Crypto from "@/util/crypto"
 // import useLocalStorage from "@/hooks/useLocalStorage"
 
 interface QuestionEntry {
@@ -13,6 +14,7 @@ interface QuestionEntry {
 }
 
 const convertPropsDataToQuestionsFormat = (questions: any): QuestionEntry[] => {
+
     var data : QuestionEntry[]= [];
     for(let key in questions) {
         var entry: QuestionEntry = {
@@ -44,42 +46,60 @@ const valueByLevel = {
 }
 
 export default function Page() {
-    const router = useRouter();console.log(window.location)
-    let [
-        tag,
-        difficulty,
-        level = "10"
-       ] = [
-        localStorage.getItem("tag"),
-        localStorage.getItem("level"),
-        localStorage.getItem("duration")
-    ]
+    const [admin, setAdmin] = useState<string>("") 
+    const [duration, setDuration] = useState<string>("") 
+
+    const searchParams = useSearchParams(); 
+    const data: string|null = searchParams.get('data')
+    const router = useRouter();
 
     const [questions, setQuestions] = useState<QuestionEntry[]>([])
     const [loading, setLoading] = useState(true);
 
-    const clearLocalStorage = () => {
-        localStorage.removeItem("tag")
-        localStorage.removeItem("level"),
-        localStorage.removeItem("duration")
+    const onFormSubmit = () => {
+        console.log('clear everything')
+        //Send report to admin with user and 
     }
+
+    useEffect(() => {
+        let search = window.location.search;
+        if (search[0] === "?") {
+             search = search.slice(1)
+        }
+        //check types
+        if (typeof data === "string" &&  data.length) {
+            const {
+                 tags,
+                duration,
+                level,
+                admin
+         } = (new Crypto).decryptThis(decodeURIComponent(data)); 
+            setAdmin(admin)
+            setDuration(duration)
+            setLoading(true)
+            helpers.questions(`tags=${tags || ''}&difficulty=${level || ''}&limit=${duration || ''}`)
+            .then(values => {
+                setQuestions(convertPropsDataToQuestionsFormat(values))
+                setLoading(false)
+            })
+            .catch(err => {
+                console.log('no questions provided to me', err)
+            })
+        } else {
+            //@todo show screen for corrupted data 
+            console.log('currupted data supplied')
+        }
+    },[])
 
     
 
     useEffect(() => {
         setLoading(true)
-        helpers.questions(`tags=${tag || ''}&difficulty=${difficulty || ''}&limit=${level || ''}`)
-        .then(values => {
-            setQuestions(convertPropsDataToQuestionsFormat(values))
-            setLoading(false)
-        })
-        .catch(err => {
-            console.log('no questions provided to me', err)
-        })
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     if (loading) {
         return <Loader />
     }
-    return <MCQ questions={questions} minutes={level} onSubmit={clearLocalStorage}/>
+    return <MCQ parent={false} questions={questions} minutes={duration} onSubmit={onFormSubmit}/>
 }

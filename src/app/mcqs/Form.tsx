@@ -1,5 +1,6 @@
 "use client"
 import React, {useState, useEffect} from "react";
+import { getSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import SelectGroupCustom from "@/components/SelectGroup/SelectGroupCustom";
 // import helpers from "@/helpers/mcq"
@@ -13,9 +14,21 @@ interface TagInterface {
     name: string
   }
 
+  interface AdminStruct {
+    name: string,
+    email: string,
+    image: string
+  }
+
+  async function getLoggedUser() {
+    const session = await getSession();
+    return session
+  }
+
 const McqForm : React.FC = () => {
     const router = useRouter();
     //Test related operations
+    const [admin, setAdmin] = useState<AdminStruct>({name: "", email :"", image: ""})
     const [tags, setTags] = useState<TagInterface[]>([])
     const [selectedTag, setSelectedTag] = useState<string>("")
     const [duration, setDuration] = useState<number>(0)
@@ -43,9 +56,17 @@ const McqForm : React.FC = () => {
 
     const GenerateTestLink = (e) => {
       e.preventDefault()
-      let cipherText = (new Crypto).encryptThis(`tags=${selectedTag}&duration=${duration.toString()}&level=${level}`);
+      let obj = {
+        tags: selectedTag,
+        duration: duration.toString(),
+        level: level,
+        admin: admin.email
+      }
+      // let cipherText = (new Crypto).encryptThis(`tags=${selectedTag}&duration=${duration.toString()}&level=${level}&admin=${admin?.email}`);
+      let cipherText = encodeURIComponent((new Crypto).encryptObject(obj))
+      // let cipherText = `tags=${selectedTag}&duration=${duration.toString()}&level=${level}&admin=${admin?.email}`;
       let url = window.location.href;
-      url += `/link/?${cipherText}`
+      url += `/link/?data=${cipherText}`
       setSecretLink(url)
     }
 
@@ -69,6 +90,10 @@ const McqForm : React.FC = () => {
       if (data.tags.length) {
           setTags(data.tags)
       }
+      getLoggedUser()
+      .then(sessionUser => {
+        setAdmin(sessionUser.user)
+      });
     },[]);
 
     return (

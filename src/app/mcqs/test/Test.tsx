@@ -1,14 +1,12 @@
 "use client";
 import React, {useEffect, useState} from "react"
-import { useRouter } from "next/navigation"
 import GuestLayout from "@/components/Layouts/GuestLayout";
 import CheckboxCustom from "@/components/Checkboxes/CheckboxCustom";
 import ScoreCard from "../score/Card";
 import AnalogClock from "@/components/Timer/Analog"
 import Warning from "./Warning"
 
-export default function Test({parent, questions, minutes, onSubmit}) {
-    const  router = useRouter();
+export default function Test({parent = false, questions, minutes, onSubmit}) {
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [submit, setSubmit] = useState(false);
     const [answers, setAnswers] = useState({})
@@ -85,7 +83,6 @@ export default function Test({parent, questions, minutes, onSubmit}) {
 
             const redirect = setTimeout(() => {
                 onSubmit();
-                router.push('/mcqs')
             }, 5000)
             return () => clearTimeout(redirect)
         }
@@ -96,7 +93,7 @@ export default function Test({parent, questions, minutes, onSubmit}) {
 
     // Component
     return (
-        <GuestLayout header={parent}>
+        <GuestLayout showHeader={parent}>
             <div className="mx-auto max-w-270">
             {
                             !submit
