@@ -68,12 +68,13 @@ export default function Page() {
         }
         //check types
         if (typeof data === "string" &&  data.length) {
-            const {
-                 tags,
-                duration,
-                level,
-                admin
-         } = (new Crypto).decryptThis(decodeURIComponent(data)); 
+            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
+        const {
+            tags,
+            duration,
+            level,
+            admin
+        } = decryptedData || {}; // Making tags property optional
             setAdmin(admin)
             setDuration(duration)
             setLoading(true)
