@@ -68,24 +68,26 @@ export default function Page() {
         }
         //check types
         if (typeof data === "string" &&  data.length) {
-            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
-        const {
-            tags,
-            duration,
-            level,
-            admin
-        } = decryptedData || {}; // Making tags property optional
-            setAdmin(admin)
-            setDuration(duration)
-            setLoading(true)
-            helpers.questions(`tags=${tags || ''}&difficulty=${level || ''}&limit=${duration || ''}`)
-            .then(values => {
-                setQuestions(convertPropsDataToQuestionsFormat(values))
-                setLoading(false)
-            })
-            .catch(err => {
-                console.log('no questions provided to me', err)
-            })
+            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));console.log('decryptedData', decryptedData)
+            if (decryptedData) {
+                const {
+                    tags,
+                    duration,
+                    level,
+                    admin
+                } = decryptedData || {}; // Making tags property optional
+                setAdmin(admin)
+                setDuration(duration)
+                setLoading(true)
+                helpers.questions(`tags=${tags || ''}&difficulty=${level || ''}&limit=${duration || ''}`)
+                .then(values => {
+                    setQuestions(convertPropsDataToQuestionsFormat(values))
+                    setLoading(false)
+                })
+                .catch(err => {
+                    console.log('no questions provided to me', err)
+                })
+            }
         } else {
             //@todo show screen for corrupted data 
             console.log('currupted data supplied')
