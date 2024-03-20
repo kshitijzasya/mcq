@@ -42,7 +42,7 @@ function Entry({children}) {
         )
     } else {
         return (
-            <GuestLayout>
+            <GuestLayout showHeader={true}>
                 <Dashboard />
             </GuestLayout>
         )
