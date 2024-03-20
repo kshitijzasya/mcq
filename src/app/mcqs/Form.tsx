@@ -15,9 +15,9 @@ interface TagInterface {
   }
 
   interface AdminStruct {
-    name: string,
-    email: string,
-    image: string
+    name: string | null | undefined,
+    email: string | null | undefined,
+    image: string | null | undefined
   }
 
   async function getLoggedUser() {
@@ -27,7 +27,7 @@ interface TagInterface {
 const McqForm : React.FC = () => {
     const router = useRouter();
     //Test related operations
-    const [admin, setAdmin] = useState<AdminStruct>({name: "", email :"", image: ""})
+    const [admin, setAdmin] = useState<AdminStruct>({name: undefined, email : undefined, image: undefined})
     const [tags, setTags] = useState<TagInterface[]>([])
     const [selectedTag, setSelectedTag] = useState<string>("")
     const [duration, setDuration] = useState<number>(0)
