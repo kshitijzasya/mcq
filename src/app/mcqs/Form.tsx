@@ -62,9 +62,8 @@ const McqForm : React.FC = () => {
         level: level,
         admin: admin.email
       }
-      // let cipherText = (new Crypto).encryptThis(`tags=${selectedTag}&duration=${duration.toString()}&level=${level}&admin=${admin?.email}`);
+      
       let cipherText = encodeURIComponent((new Crypto).encryptObject(obj))
-      // let cipherText = `tags=${selectedTag}&duration=${duration.toString()}&level=${level}&admin=${admin?.email}`;
       let url = window.location.href;
       url += `/link/?data=${cipherText}`
       setSecretLink(url)
