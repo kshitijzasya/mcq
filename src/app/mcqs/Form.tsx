@@ -90,7 +90,9 @@ const McqForm : React.FC = () => {
       }
       getLoggedUser()
       .then(sessionUser => {
-        setAdmin(sessionUser?.user)
+        if (sessionUser) {
+          setAdmin(sessionUser?.user)
+        }
       });
     },[]);
 
