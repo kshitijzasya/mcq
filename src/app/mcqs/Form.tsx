@@ -91,7 +91,7 @@ const McqForm : React.FC = () => {
       getLoggedUser()
       .then(sessionUser => {
         //Setting session if exists
-        if (sessionUser) {
+        if (sessionUser && sessionUser.user) {
           setAdmin(sessionUser?.user)
         }
       });
