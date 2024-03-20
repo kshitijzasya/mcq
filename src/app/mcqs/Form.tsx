@@ -21,8 +21,7 @@ interface TagInterface {
   }
 
   async function getLoggedUser() {
-    const session = await getSession();
-    return session
+    return await getSession();
   }
 
 const McqForm : React.FC = () => {
@@ -91,7 +90,7 @@ const McqForm : React.FC = () => {
       }
       getLoggedUser()
       .then(sessionUser => {
-        setAdmin(sessionUser.user)
+        setAdmin(sessionUser?.user)
       });
     },[]);
 
