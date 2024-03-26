@@ -26,7 +26,6 @@ interface TagInterface {
 
 const McqForm : React.FC = () => {
     const router = useRouter();
-    const pathname = usePathname()
     //Test related operations
     const [admin, setAdmin] = useState<AdminStruct>({name: undefined, email : undefined, image: undefined})
     const [tags, setTags] = useState<TagInterface[]>([])
@@ -64,11 +63,14 @@ const McqForm : React.FC = () => {
       }
       
       let cipherText = encodeURIComponent((new Crypto).encryptObject(obj));
-      console.log('router', pathname)
-      // let url = window.location.href;
-      let url = '';
-      url += `/link/?data=${cipherText}`
-      setSecretLink(url)
+     
+      if (typeof window !== undefined){
+         let url = window.location.href;
+        url += `/link/?data=${cipherText}`
+        console.log(router)
+        setSecretLink(url)
+      }
+      
     }
 
     const copyToClipboard = () => {
