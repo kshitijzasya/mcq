@@ -76,12 +76,13 @@ export default function Page() {
         }
         //check types
         if (typeof data === "string" &&  data.length) {
-            const decryptedData : DecryptedData = (new Crypto).decryptThis(decodeURIComponent(data));console.log('decryptedData', decryptedData)
-            if (decryptedData) {
-                setAdmin(decryptedData?.admin || '')
-                setDuration(decryptedData?.duration || '')
+            const decryptedData : DecryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
+            if (typeof decryptedData === 'object' && decryptedData !== null) {
+                const { admin, duration, tags, level } = decryptedData;
+                setAdmin(admin || '')
+                setDuration(duration || '')
                 setLoading(true)
-                helpers.questions(`tags=${decryptedData?.tags || ''}&difficulty=${decryptedData?.level}&limit=${decryptedData?.duration}`)
+                helpers.questions(`tags=${tags || ''}&difficulty=${level || ''}&limit=${duration || 0}`)
                 .then(values => {
                     setQuestions(convertPropsDataToQuestionsFormat(values))
                     setLoading(false)

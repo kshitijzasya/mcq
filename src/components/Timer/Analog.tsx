@@ -25,7 +25,7 @@ const AnalogClock: React.FC<{minutes: number,resetClock: boolean, onComplete: Fu
             setTimeOver(true);
             onComplete(true)
         } else if(minute > 0 && seconds === 0) {
-            setMinutes(minutes - 1)
+            setMinutes(minute - 1)
             setSeconds(59)
         }
     }, [minute, seconds])
