@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
             </li>
             <li >
                 <ContactForm  show={showContactForm} css={PopUpStyle}/>
-                <span onClick={e => setContactForm(true)} className="cursor-pointer">Contact Us</span>
+                <span onClick={e => setContactForm(!showContactForm)} className="cursor-pointer">Contact Us</span>
             </li>
             <li>
                 <span>All Rights reserved with Kshitij Sharma</span>
