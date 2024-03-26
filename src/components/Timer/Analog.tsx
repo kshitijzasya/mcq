@@ -20,13 +20,17 @@ const AnalogClock: React.FC<{minutes: number,resetClock: boolean, onComplete: Fu
             setMinutes((prevMin) => prevMin === 0 ?  0 : prevMin - 1);
         }
     }, [seconds, timeOver])
-    useEffect(() => {
+    useEffect(() => { console.log({minute, seconds})
         if(minute === 0 && seconds === 0) {
             setTimeOver(true);
             onComplete(true)
+        } else if(minute > 0 && seconds === 0) {
+            setMinutes(minutes - 1)
+            setSeconds(59)
         }
     }, [minute, seconds])
 
+    //Reset the clock to initial state
     useEffect(() => {
         if(resetClock) {
             setSeconds(0)
