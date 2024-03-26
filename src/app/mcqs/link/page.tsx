@@ -13,6 +13,14 @@ interface QuestionEntry {
     correct: string
 }
 
+interface DecryptedData {
+    admin?: string;
+    duration?: string;
+    tags?: string;
+    level?: string;
+    // Add other properties if needed
+}
+
 const convertPropsDataToQuestionsFormat = (questions: any): QuestionEntry[] => {
 
     var data : QuestionEntry[]= [];
@@ -68,12 +76,12 @@ export default function Page() {
         }
         //check types
         if (typeof data === "string" &&  data.length) {
-            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));console.log('decryptedData', decryptedData)
+            const decryptedData : DecryptedData = (new Crypto).decryptThis(decodeURIComponent(data));console.log('decryptedData', decryptedData)
             if (decryptedData) {
-                setAdmin(admin)
-                setDuration(duration)
+                setAdmin(decryptedData?.admin || '')
+                setDuration(decryptedData?.duration || '')
                 setLoading(true)
-                helpers.questions(`tags=${decryptedData?.tags}&difficulty=${decryptedData?.level}&limit=${decryptedData?.duration}`)
+                helpers.questions(`tags=${decryptedData?.tags || ''}&difficulty=${decryptedData?.level}&limit=${decryptedData?.duration}`)
                 .then(values => {
                     setQuestions(convertPropsDataToQuestionsFormat(values))
                     setLoading(false)
