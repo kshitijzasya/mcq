@@ -77,7 +77,7 @@ export default function Page() {
         }
         //check types
         if (typeof data === "string" &&  data.length) {
-            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
+            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data)) as { tags: string; duration: string; level: string; admin: string };
             if (typeof decryptedData === 'object' && decryptedData !== null) {
                 //Setting properties
                 const tags = decryptedData.hasOwnProperty('tags') ? decryptedData.tags : '';
