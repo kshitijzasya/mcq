@@ -82,16 +82,27 @@ export default function Page() {
                 //Setting properties
                 const tags = decryptedData.hasOwnProperty('tags') ? decryptedData.tags : '';
                 const level = decryptedData.hasOwnProperty('level') ? decryptedData.level : '';
-
+                let url_String = ``;
                 if('admin' in decryptedData) {
                     setAdmin(decryptedData.admin || '')
                 }
 
                 if( 'duration' in decryptedData) {
                     setDuration(decryptedData.duration || '')
+                    url_String += `&limit=${duration || 0}`
+                }
+
+                if('tags' in decryptedData) {
+                    const tags = decryptedData.tags
+                    url_String += `tags=${tags || ''}`
+                }
+
+                if('level' in decryptedData){
+                    const level = decryptedData
+                    url_String += `&difficulty=${level || ''}`
                 }
                 setLoading(true)
-                helpers.questions(`tags=${tags || ''}&difficulty=${level || ''}&limit=${duration || 0}`)
+                helpers.questions(url_String)
                 .then(values => {
                     setQuestions(convertPropsDataToQuestionsFormat(values))
                     setLoading(false)
