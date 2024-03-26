@@ -70,21 +70,10 @@ export default function Page() {
         if (typeof data === "string" &&  data.length) {
             const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));console.log('decryptedData', decryptedData)
             if (decryptedData) {
-                const {
-                    tags,
-                    duration,
-                    level,
-                    admin
-                } = decryptedData || {
-                    tags: '',
-                    duration: '',
-                    level: '',
-                    admin: null
-                }; // Making tags property optional
                 setAdmin(admin)
                 setDuration(duration)
                 setLoading(true)
-                helpers.questions(`tags=${tags}&difficulty=${level}&limit=${duration}`)
+                helpers.questions(`tags=${decryptedData?.tags}&difficulty=${decryptedData?.level}&limit=${decryptedData?.duration}`)
                 .then(values => {
                     setQuestions(convertPropsDataToQuestionsFormat(values))
                     setLoading(false)

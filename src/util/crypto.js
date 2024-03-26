@@ -20,12 +20,6 @@ class Crypto {
     }
 
     decryptThis(cipherText = "") {
-        // const halfLength = Math.ceil(cipherText.length / 2)
-        // const cipherTexts = [ cipherText.substr(0, halfLength), cipherText.substr(halfLength) ]
-        // console.log('encrypted string', typeof(encryptedString))
-        // return SimpleCrypto.update(cipherTexts[0])
-        //         .append(cipherTexts[1])
-        //         .decrypt()
         return this.SimpleCrypto.decrypt(cipherText)
     }
 
