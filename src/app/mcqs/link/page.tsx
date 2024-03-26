@@ -76,7 +76,7 @@ export default function Page() {
         }
         //check types
         if (typeof data === "string" &&  data.length) {
-            const decryptedData : DecryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
+            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
             if (typeof decryptedData === 'object' && decryptedData !== null) {
                 const { admin, duration, tags, level } = decryptedData;
                 setAdmin(admin || '')
