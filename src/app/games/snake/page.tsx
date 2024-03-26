@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 // import React, { useState, useEffect } from "react";
 
 // const ROWS = 20;
@@ -19,7 +19,7 @@
 //   };
 // };
 
-// const SnakeGame = () => {
+const SnakeGame = () => {
 //   const [snake, setSnake] = useState([
 //     { x: 10, y: 10 },
 //     { x: 11, y: 10 },
@@ -108,17 +108,17 @@
 //     };
 //   }, [snake, direction, food, gameOver]);
 
-//   return (
-//     <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
-//       <div style={{ position: "relative", width: COLS * CELL_SIZE, height: ROWS * CELL_SIZE, border: "1px solid black" }}>
-//         {snake.map((segment, index) => (
-//           <div key={index} style={{ position: "absolute", left: segment.x * CELL_SIZE, top: segment.y * CELL_SIZE, width: CELL_SIZE, height: CELL_SIZE, backgroundColor: "green" }} />
-//         ))}
-//         <div style={{ position: "absolute", left: food.x * CELL_SIZE, top: food.y * CELL_SIZE, width: CELL_SIZE, height: CELL_SIZE, backgroundColor: "red" }} />
-//         {gameOver && <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "24px", fontWeight: "bold" }}>Game Over</div>}
-//       </div>
-//     </div>
-//   );
-// };
+  return (
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+      {/* <div style={{ position: "relative", width: COLS * CELL_SIZE, height: ROWS * CELL_SIZE, border: "1px solid black" }}>
+        {snake.map((segment, index) => (
+          <div key={index} style={{ position: "absolute", left: segment.x * CELL_SIZE, top: segment.y * CELL_SIZE, width: CELL_SIZE, height: CELL_SIZE, backgroundColor: "green" }} />
+        ))}
+        <div style={{ position: "absolute", left: food.x * CELL_SIZE, top: food.y * CELL_SIZE, width: CELL_SIZE, height: CELL_SIZE, backgroundColor: "red" }} />
+        {gameOver && <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "24px", fontWeight: "bold" }}>Game Over</div>}
+      </div> */}
+    </div>
+  );
+};
 
-// export default SnakeGame;
+export default SnakeGame;
