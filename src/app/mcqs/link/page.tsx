@@ -80,13 +80,16 @@ export default function Page() {
             const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
             if (typeof decryptedData === 'object' && decryptedData !== null) {
                 //Setting properties
-                const admin = decryptedData.hasOwnProperty('admin') ? decryptedData.admin : '';
-                const duration = decryptedData.hasOwnProperty('duration') ? decryptedData.duration : '';
                 const tags = decryptedData.hasOwnProperty('tags') ? decryptedData.tags : '';
                 const level = decryptedData.hasOwnProperty('level') ? decryptedData.level : '';
 
-                setAdmin(admin || '')
-                setDuration(duration || '')
+                if('admin' in decryptedData) {
+                    setAdmin(decryptedData.admin || '')
+                }
+
+                if( 'duration' in decryptedData) {
+                    setDuration(decryptedData.duration || '')
+                }
                 setLoading(true)
                 helpers.questions(`tags=${tags || ''}&difficulty=${level || ''}&limit=${duration || 0}`)
                 .then(values => {

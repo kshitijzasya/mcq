@@ -64,7 +64,7 @@ export default function Test({parent = false, questions, minutes, onSubmit}) {
 
         document.addEventListener("visibilitychange", (e) => {
             if (document.visibilityState === "hidden") {
-                onSubmit()
+                setSubmit(true)
             }
         })
 
