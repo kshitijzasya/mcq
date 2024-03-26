@@ -62,10 +62,17 @@ export default function Test({parent = false, questions, minutes, onSubmit}) {
 
         document.addEventListener('keydown', handleReload)
 
+        document.addEventListener("visibilitychange", (e) => {
+            if (document.visibilityState === "hidden") {
+                onSubmit()
+            }
+        })
+
         return () => {
             window.removeEventListener('beforeunload', handleRefresh)
             document.removeEventListener('contextmenu', (e) => e.preventDefault())
             document.removeEventListener('keydown', handleReload)
+            document.removeEventListener('visibilitychange', e => e)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

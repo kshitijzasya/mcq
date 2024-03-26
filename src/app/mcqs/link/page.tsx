@@ -67,6 +67,7 @@ export default function Page() {
     const onFormSubmit = () => {
         console.log('clear everything')
         //Send report to admin with user and 
+        console.log('send report to admin')
     }
 
     useEffect(() => {
@@ -78,7 +79,12 @@ export default function Page() {
         if (typeof data === "string" &&  data.length) {
             const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data));
             if (typeof decryptedData === 'object' && decryptedData !== null) {
-                const { admin, duration, tags, level } = decryptedData;
+                //Setting properties
+                const admin = decryptedData.hasOwnProperty('admin') ? decryptedData.admin : '';
+                const duration = decryptedData.hasOwnProperty('duration') ? decryptedData.duration : '';
+                const tags = decryptedData.hasOwnProperty('tags') ? decryptedData.tags : '';
+                const level = decryptedData.hasOwnProperty('level') ? decryptedData.level : '';
+
                 setAdmin(admin || '')
                 setDuration(duration || '')
                 setLoading(true)
