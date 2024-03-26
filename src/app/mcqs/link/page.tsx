@@ -71,46 +71,49 @@ export default function Page() {
     }
 
     useEffect(() => {
-        let search = window.location.search;
-        if (search[0] === "?") {
-             search = search.slice(1)
-        }
-        //check types
-        if (typeof data === "string" &&  data.length) {
-            const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data)) as { tags: string; duration: string; level: string; admin: string };
-            if (typeof decryptedData === 'object' && decryptedData !== null) {
-                //Setting properties
-                let url_String = ``;
-                if('admin' in decryptedData) {
-                    setAdmin(decryptedData.admin || '')
-                }
-
-                if( 'duration' in decryptedData) {
-                    setDuration(decryptedData.duration || '')
-                    url_String += `&limit=${decryptedData.duration || 0}`
-                }
-
-                if('tags' in decryptedData) {
-                    url_String += `tags=${decryptedData.tags || ''}`
-                }
-
-                if('level' in decryptedData){
-                    url_String += `&difficulty=${decryptedData.level || ''}`
-                }
-                setLoading(true)
-                helpers.questions(url_String)
-                .then(values => {
-                    setQuestions(convertPropsDataToQuestionsFormat(values))
-                    setLoading(false)
-                })
-                .catch(err => {
-                    console.log('no questions provided to me', err)
-                })
+        if (typeof window !== 'undefined') {
+            let search = window.location.search;
+            if (search[0] === "?") {
+                 search = search.slice(1)
             }
-        } else {
-            //@todo show screen for corrupted data 
-            console.log('currupted data supplied')
+            //check types
+            if (typeof data === "string" &&  data.length) {
+                const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data)) as { tags: string; duration: string; level: string; admin: string };
+                if (typeof decryptedData === 'object' && decryptedData !== null) {
+                    //Setting properties
+                    let url_String = ``;
+                    if('admin' in decryptedData) {
+                        setAdmin(decryptedData.admin || '')
+                    }
+    
+                    if( 'duration' in decryptedData) {
+                        setDuration(decryptedData.duration || '')
+                        url_String += `&limit=${decryptedData.duration || 0}`
+                    }
+    
+                    if('tags' in decryptedData) {
+                        url_String += `tags=${decryptedData.tags || ''}`
+                    }
+    
+                    if('level' in decryptedData){
+                        url_String += `&difficulty=${decryptedData.level || ''}`
+                    }
+                    setLoading(true)
+                    helpers.questions(url_String)
+                    .then(values => {
+                        setQuestions(convertPropsDataToQuestionsFormat(values))
+                        setLoading(false)
+                    })
+                    .catch(err => {
+                        console.log('no questions provided to me', err)
+                    })
+                }
+            } else {
+                //@todo show screen for corrupted data 
+                console.log('currupted data supplied')
+            }
         }
+        
     },[])
 
     

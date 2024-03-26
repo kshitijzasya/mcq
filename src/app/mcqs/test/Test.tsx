@@ -43,36 +43,38 @@ export default function Test({parent = false, questions, minutes, onSubmit}) {
     }
 
     useEffect(() => {
-        const handleRefresh = e => {
-            e.preventDefault();
-            localStorage.removeItem("tag")
-            localStorage.removeItem("level"),
-            localStorage.removeItem("duration")
-        }
-
-        const handleReload = (event) => {
-            if (event.ctrlKey || event.metaKey || event.key === 'F5' || event.key === 'r') {
-              event.preventDefault();
+        if(typeof window !== 'undefined') {
+            const handleRefresh = e => {
+                e.preventDefault();
+                localStorage.removeItem("tag")
+                localStorage.removeItem("level"),
+                localStorage.removeItem("duration")
             }
-          };
-        //Disable
-        window.addEventListener('beforeunload', handleRefresh);
-
-        document.addEventListener('contextmenu', (e) => e.preventDefault())
-
-        document.addEventListener('keydown', handleReload)
-
-        document.addEventListener("visibilitychange", (e) => {
-            if (document.visibilityState === "hidden") {
-                setSubmit(true)
+    
+            const handleReload = (event) => {
+                if (event.ctrlKey || event.metaKey || event.key === 'F5' || event.key === 'r') {
+                  event.preventDefault();
+                }
+              };
+            //Disable
+            window.addEventListener('beforeunload', handleRefresh);
+    
+            document.addEventListener('contextmenu', (e) => e.preventDefault())
+    
+            document.addEventListener('keydown', handleReload)
+    
+            document.addEventListener("visibilitychange", (e) => {
+                if (document.visibilityState === "hidden") {
+                    setSubmit(true)
+                }
+            })
+    
+            return () => {
+                window.removeEventListener('beforeunload', handleRefresh)
+                document.removeEventListener('contextmenu', (e) => e.preventDefault())
+                document.removeEventListener('keydown', handleReload)
+                document.removeEventListener('visibilitychange', e => e)
             }
-        })
-
-        return () => {
-            window.removeEventListener('beforeunload', handleRefresh)
-            document.removeEventListener('contextmenu', (e) => e.preventDefault())
-            document.removeEventListener('keydown', handleReload)
-            document.removeEventListener('visibilitychange', e => e)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

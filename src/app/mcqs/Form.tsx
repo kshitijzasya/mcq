@@ -1,7 +1,7 @@
 "use client"
 import React, {useState, useEffect} from "react";
 import { getSession } from "next-auth/react"
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import SelectGroupCustom from "@/components/SelectGroup/SelectGroupCustom";
 // import helpers from "@/helpers/mcq"
 import data from "../../../public/mcqs/data.json"
@@ -26,6 +26,7 @@ interface TagInterface {
 
 const McqForm : React.FC = () => {
     const router = useRouter();
+    const pathname = usePathname()
     //Test related operations
     const [admin, setAdmin] = useState<AdminStruct>({name: undefined, email : undefined, image: undefined})
     const [tags, setTags] = useState<TagInterface[]>([])
@@ -62,7 +63,8 @@ const McqForm : React.FC = () => {
         admin: admin.email
       }
       
-      let cipherText = encodeURIComponent((new Crypto).encryptObject(obj))
+      let cipherText = encodeURIComponent((new Crypto).encryptObject(obj));
+      console.log('router', pathname)
       let url = window.location.href;
       url += `/link/?data=${cipherText}`
       setSecretLink(url)

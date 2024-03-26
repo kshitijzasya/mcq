@@ -18,7 +18,7 @@ function Entry({children}) {
     //Cases for authenticated routes
     if(!Authenticated){
         //Check if routes are in valid unprotected routes
-        if (routes.inProtecedRoutes(window.location.pathname)) {
+        if (routes.inProtecedRoutes(window?.location?.pathname)) {
             return (
                 <>
                 {children}
