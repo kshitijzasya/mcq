@@ -75,11 +75,16 @@ export default function Page() {
                     duration,
                     level,
                     admin
-                } = decryptedData || {}; // Making tags property optional
+                } = decryptedData || {
+                    tags: '',
+                    duration: '',
+                    level: '',
+                    admin: null
+                }; // Making tags property optional
                 setAdmin(admin)
                 setDuration(duration)
                 setLoading(true)
-                helpers.questions(`tags=${tags || ''}&difficulty=${level || ''}&limit=${duration || ''}`)
+                helpers.questions(`tags=${tags}&difficulty=${level}&limit=${duration}`)
                 .then(values => {
                     setQuestions(convertPropsDataToQuestionsFormat(values))
                     setLoading(false)
