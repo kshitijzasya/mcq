@@ -80,8 +80,6 @@ export default function Page() {
             const decryptedData = (new Crypto).decryptThis(decodeURIComponent(data)) as { tags: string; duration: string; level: string; admin: string };
             if (typeof decryptedData === 'object' && decryptedData !== null) {
                 //Setting properties
-                const tags = decryptedData.hasOwnProperty('tags') ? decryptedData.tags : '';
-                const level = decryptedData.hasOwnProperty('level') ? decryptedData.level : '';
                 let url_String = ``;
                 if('admin' in decryptedData) {
                     setAdmin(decryptedData.admin || '')
@@ -89,17 +87,15 @@ export default function Page() {
 
                 if( 'duration' in decryptedData) {
                     setDuration(decryptedData.duration || '')
-                    url_String += `&limit=${duration || 0}`
+                    url_String += `&limit=${decryptedData.duration || 0}`
                 }
 
                 if('tags' in decryptedData) {
-                    const tags = decryptedData.tags
-                    url_String += `tags=${tags || ''}`
+                    url_String += `tags=${decryptedData.tags || ''}`
                 }
 
                 if('level' in decryptedData){
-                    const level = decryptedData
-                    url_String += `&difficulty=${level || ''}`
+                    url_String += `&difficulty=${decryptedData.level || ''}`
                 }
                 setLoading(true)
                 helpers.questions(url_String)
