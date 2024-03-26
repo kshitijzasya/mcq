@@ -151,7 +151,7 @@ export default function Test({parent = false, questions, minutes, onSubmit}) {
                     </div>
                     <div className="col-span-2 xl:col-span-2 bg-white dark:bg-boxdark">
                             {
-                                warning && <Warning title="" content="You are not allowed to refresh page!" />
+                                warning && <Warning title="" content="You are not allowed to refresh page or visit any other page!" />
                             }
                             <AnalogClock minutes={parseInt(minutes) ?? 10} resetClock={resetClock} onComplete={timerCompleted}/>
                     </div>
