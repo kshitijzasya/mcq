@@ -65,7 +65,8 @@ const McqForm : React.FC = () => {
       
       let cipherText = encodeURIComponent((new Crypto).encryptObject(obj));
       console.log('router', pathname)
-      let url = window.location.href;
+      // let url = window.location.href;
+      let url = '';
       url += `/link/?data=${cipherText}`
       setSecretLink(url)
     }
