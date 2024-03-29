@@ -6,7 +6,7 @@ services:
       context: .
     restart: always
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - WATCHPACK_POLLING=true
     volumes:
       - .:/app

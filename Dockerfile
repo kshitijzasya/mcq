@@ -1,14 +1,14 @@
 FROM node:alpine as builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm install -frozen-lockfile
+RUN npm install
 COPY . .
 COPY .env.example .env
 # RUN npm run build
-ENV NODE_ENV=development
+# ENV NODE_ENV=development
 
 # FROM node:alpine
-# ENV NODE_ENV=production
+ENV NODE_ENV=production
 # WORKDIR /app
 # RUN chown node:node
 # USER node

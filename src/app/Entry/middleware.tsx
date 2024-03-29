@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useEffect } from "react";
 import {  useSearchParams } from 'next/navigation';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Dashboard from "@/app/dashboard";
@@ -16,10 +16,15 @@ function Entry({children}) {
 
     const Authenticated = IsAuthenticated()
 
+    useEffect(() => {
+        // Perform any side-effects that depend on the window object here
+        // Example: fetching data, interacting with DOM elements, etc.
+    }, []);
+
     //Cases for authenticated routes
     if(!Authenticated){
         //Check if routes are in valid unprotected routes
-        if (routes.inProtecedRoutes(window?.location?.pathname)) {
+        if (routes.inProtecedRoutes(typeof window !== "undefined" ? window.location.pathname : '')) {
             return (
                 <>
                 {children}

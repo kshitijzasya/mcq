@@ -66,7 +66,7 @@ const McqForm : React.FC = () => {
      
       if (typeof window !== undefined){
          let url = window.location.href;
-        url += `/link/?data=${cipherText}`
+        url = `/link/?data=${cipherText}`
         console.log(router)
         setSecretLink(url)
       }
