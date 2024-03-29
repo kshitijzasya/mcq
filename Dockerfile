@@ -5,7 +5,7 @@ RUN npm install -frozen-lockfile
 COPY . .
 COPY .env.example .env
 # RUN npm run build
-# ENV NODE_ENV=development
+ENV NODE_ENV=development
 
 # FROM node:alpine
 # ENV NODE_ENV=production
