@@ -3,9 +3,10 @@ import React from "react";
 import {  useSearchParams } from 'next/navigation';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Dashboard from "@/app/dashboard";
+import GuestLayout from "@/components/Layouts/GuestLayout";
 import Ecommerce from "@/components/Dashboard/E-commerce";
 import AuthForm from "@/app/auth/signin/form"
-import GuestLayout from "@/components/Layouts/GuestLayout";
+
 import IsAuthenticated from "./IsAuthenticated"
 import routes from "@/helpers/routes"
 
