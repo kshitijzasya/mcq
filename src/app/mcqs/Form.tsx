@@ -64,13 +64,11 @@ const McqForm : React.FC = () => {
       
       let cipherText = encodeURIComponent((new Crypto).encryptObject(obj));
      
-      if (typeof window !== undefined){
-         let url = window.location.href;
+      if (typeof window !== "undefined"){
+        let url = window.location.href
         url = `/link/?data=${cipherText}`
-        console.log(router)
         setSecretLink(url)
-      }
-      
+     }
     }
 
     const copyToClipboard = () => {

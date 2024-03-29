@@ -53,7 +53,7 @@ const valueByLevel = {
     "30": "hard"
 }
 
-export default function Page() {
+function Page() {
     const [admin, setAdmin] = useState<string>("") 
     const [duration, setDuration] = useState<string>("") 
 
@@ -127,4 +127,7 @@ export default function Page() {
         return <Loader />
     }
     return <MCQ parent={false} questions={questions} minutes={duration} onSubmit={onFormSubmit}/>
+    
 }
+
+export default Page;

@@ -6,7 +6,7 @@ import ScoreCard from "../score/Card";
 import AnalogClock from "@/components/Timer/Analog"
 import Warning from "./Warning"
 
-export default function Test({parent = false, questions, minutes, onSubmit}) {
+function Test({parent = false, questions, minutes, onSubmit}) {
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [submit, setSubmit] = useState(false);
     const [answers, setAnswers] = useState({})
@@ -165,3 +165,5 @@ export default function Test({parent = false, questions, minutes, onSubmit}) {
         </GuestLayout>
     )
 }
+
+export default Test;
