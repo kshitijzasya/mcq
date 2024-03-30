@@ -91,8 +91,11 @@ function Test({parent = false, questions, minutes, onSubmit}) {
         setScore(correctAnswersCount);
 
             const redirect = setTimeout(() => {
-                onSubmit();
-            }, 5000)
+                onSubmit({
+                    score: correctAnswersCount,
+                    total: questions.length
+                });
+            }, 1000)
             return () => clearTimeout(redirect)
         }
         
