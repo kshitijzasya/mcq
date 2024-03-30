@@ -1,4 +1,4 @@
-import { HIGH_SCORE_KEY } from "./page";
+import { HIGH_SCORE_KEY } from "./SnakeGame";
 
 interface GameOverModal {
   finalScore: number;
