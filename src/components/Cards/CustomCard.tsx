@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 
 interface CustomCardProps {
   title: string;
-  total: string;
+  total?: string;
   head: string;
   children: ReactNode;
 }
@@ -23,11 +23,16 @@ const CustomCard: React.FC<CustomCardProps> = ({
           {children}
         </div>
 
-        <div className=" flex items-center justify-between">
-            <h4 className="text-title-md font-bold text-black dark:text-white">
-              {total}
-            </h4>
-        </div>
+      {
+        total && 
+        (
+          <div className=" flex items-center justify-between">
+              <h4 className="text-title-md font-bold text-black dark:text-white">
+                {total}
+              </h4>
+          </div>
+        )
+      }
       </div>
     </div>
   );
