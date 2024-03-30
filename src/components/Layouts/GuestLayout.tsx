@@ -1,9 +1,7 @@
 "use client";
-import React, { useState, ReactNode } from "react";
-import Sidebar from "@/components/Sidebar";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer/index";
-import Script from "next/script";
 
  function GuestLayout({
   children,
@@ -18,7 +16,6 @@ import Script from "next/script";
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        {/* <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}

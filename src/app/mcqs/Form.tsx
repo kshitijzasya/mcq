@@ -60,7 +60,8 @@ const McqForm : React.FC = () => {
         duration: duration.toString(),
         level: level,
         admin: admin.email
-      }
+      } 
+      console.log('obj', obj)
       
       let cipherText = encodeURIComponent((new Crypto).encryptObject(obj));
      
