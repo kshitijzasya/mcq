@@ -101,7 +101,7 @@ function Page() {
                     }
     
                     if('tags' in decryptedData) {
-                        url_String += `tags=${decryptedData.tags || ''}`
+                        url_String += `&tags=${decryptedData.tags || ''}`
                     }
     
                     if('level' in decryptedData){
