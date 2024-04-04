@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link"
 import CustomCard from "@/components/Cards/CustomCard";
+import TradingWidget from "@/components/Trading/Widget";
 
 const Dashboard: React.FC = () => {
   return (
