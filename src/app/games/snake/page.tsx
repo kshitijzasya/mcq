@@ -1,3 +1,12 @@
 import SnakesGame from "./SnakeGame";
+import GuestLayout from "@/components/Layouts/GuestLayout";
 
-export default SnakesGame;
+const SnakeGameWithWrapper = () => {
+    return (
+        <GuestLayout showHeader={true}>
+            <SnakesGame />
+        </GuestLayout>
+    )
+}
+
+export default SnakeGameWithWrapper;

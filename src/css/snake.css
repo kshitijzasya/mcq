@@ -115,8 +115,9 @@
   width: 700px;
   height: 300px;
 
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   text-align: center;
   border-radius: 10px;
 
