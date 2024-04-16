@@ -60,13 +60,14 @@ const McqForm : React.FC = () => {
         duration: duration.toString(),
         level: level,
         admin: admin.email
-      }
+      } 
+      console.log('obj', obj)
       
       let cipherText = encodeURIComponent((new Crypto).encryptObject(obj));
      
       if (typeof window !== "undefined"){
         let url = window.location.href
-        url = `/link/?data=${cipherText}`
+        url += `/link/?data=${cipherText}`
         setSecretLink(url)
      }
     }

@@ -5,7 +5,8 @@ import helpers from "@/helpers/mcq"
 import MCQ from "@/app/mcqs/test/Test"
 import Loader from "@/components/common/Loader"
 import Crypto from "@/util/crypto"
-// import useLocalStorage from "@/hooks/useLocalStorage"
+import GeneralInfoForm from "@/components/Forms/GeneralInfo"
+import EmailHelper from "@/helpers/email" 
 
 interface QuestionEntry {
     question: string;
@@ -64,10 +65,18 @@ function Page() {
     const [questions, setQuestions] = useState<QuestionEntry[]>([])
     const [loading, setLoading] = useState(true);
 
-    const onFormSubmit = () => {
-        console.log('clear everything')
+    const [InformationCollected, setInformationCollected] = useState(false)
+    const [userInfo, setUserInfo] = useState<{}>({})
+
+    function handleInfoForm(e, form) {
+        e.preventDefault();
+        setUserInfo(form);
+        setInformationCollected(true)
+    }
+
+    const onFormSubmit = ({score, total}) => {
         //Send report to admin with user and 
-        console.log('send report to admin')
+        return EmailHelper('post', {...userInfo, score, total})
     }
 
     useEffect(() => {
@@ -92,7 +101,7 @@ function Page() {
                     }
     
                     if('tags' in decryptedData) {
-                        url_String += `tags=${decryptedData.tags || ''}`
+                        url_String += `&tags=${decryptedData.tags || ''}`
                     }
     
                     if('level' in decryptedData){
@@ -126,6 +135,16 @@ function Page() {
     if (loading) {
         return <Loader />
     }
+
+    if (!InformationCollected) {
+        return (
+            <div className="flex flex-row justify-center">
+                <div className="flex flex-col py-4">
+                    <GeneralInfoForm handleFormSubmit={handleInfoForm}/>
+                </div>
+            </div>
+        )
+    } 
     return <MCQ parent={false} questions={questions} minutes={duration} onSubmit={onFormSubmit}/>
     
 }

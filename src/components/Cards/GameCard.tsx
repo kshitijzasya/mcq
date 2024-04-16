@@ -1,13 +1,13 @@
 import React, { ReactNode } from "react";
 
-interface CustomCardProps {
+interface GameCardProps {
   title: string;
   total?: string;
   head: string;
   children: ReactNode;
 }
 
-const CustomCard: React.FC<CustomCardProps> = ({
+const GameCard: React.FC<GameCardProps> = ({
   title,
   total,
   head,
@@ -15,13 +15,14 @@ const CustomCard: React.FC<CustomCardProps> = ({
 }) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark ">
-      <h2 className="flex text-left justify-start">
+      {/* <h2 className="flex text-center justify-center">
         {head}({title})
-      </h2>
-      <div className="grid grid-cols-2 items-center">
-        <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
+      </h2> */}
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full ">
           {children}
         </div>
+        <strong>{title}</strong>
 
       {
         total && 
@@ -38,4 +39,4 @@ const CustomCard: React.FC<CustomCardProps> = ({
   );
 };
 
-export default CustomCard;
+export default GameCard;
