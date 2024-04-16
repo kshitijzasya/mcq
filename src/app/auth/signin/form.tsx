@@ -15,7 +15,7 @@ const AuthForm: React.FC<AuthFormprops> = () => {
     return (
         <div className="rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap justify-center items-center bg-white">
-          <div className="hidden w-full xl:block xl:w-1/2">
+          <div className=" w-full xl:block xl:w-1/2">
             <div className="px-26 py-8 text-center">
               {/* <Link className="mb-5.5 inline-block" href="/">
                 <Image
