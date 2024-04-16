@@ -3,7 +3,7 @@ const storage = {
     refreshKeysIndex: 'items_to_refresh',
     get: function(key) { 
         let data = localStorage.getItem(key)
-        return ( data !== null && data !== undefined && typeof data !== "undefined" ) ? JSON.parse(data) : data
+        return ( data !== null && data !== undefined && typeof data !== "undefined" ) ? JSON.parse(data) : data;
     },
     has: function(key) {
         return localStorage.getItem(key) !== null;
