@@ -2,7 +2,8 @@
 const storage = {
     refreshKeysIndex: 'items_to_refresh',
     get: function(key) { 
-        return JSON.parse(localStorage.getItem(key))
+        let data = localStorage.getItem(key)
+        return data !== null || data !== undefined ? JSON.parse(data) : data
     },
     has: function(key) {
         return localStorage.getItem(key) !== null;
