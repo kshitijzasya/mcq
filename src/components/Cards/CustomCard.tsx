@@ -15,7 +15,7 @@ const CustomCard: React.FC<CustomCardProps> = ({
 }) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark ">
-      <h2 className="flex text-center justify-center">
+      <h2 className="flex text-left justify-start">
         {head}({title})
       </h2>
       <div className="grid grid-cols-2 items-center">

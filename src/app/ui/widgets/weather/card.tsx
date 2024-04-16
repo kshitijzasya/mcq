@@ -51,7 +51,7 @@ const Card: React.FC<CardProps> = ({place, weather}) => {
           </div>
           <div className="flex flex-col gap-3">
             <div className="flex flex-row justify-evenly">
-                <Image src="/images/icon/wind.svg" width={30} height={30} alt="Wind" title-="Wind"/>
+                <Image src="/images/icon/wind.svg" width={30} height={30} alt="Wind" title="Wind"/>
                 <small><b>({weather.wind_kph}/kmph)</b></small>
             </div>
             <div className="flex flex-row justify-evenly">
