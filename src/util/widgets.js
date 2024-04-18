@@ -12,7 +12,7 @@ const API =  {
             return await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`);
         },
         fetchWeatherApi2: async function(lat, long) {
-            const result = await fetch(`http://api.weatherapi.com/v1/current.json?q=${lat},${long}&key=${Weather_key}`);
+            const result = await fetch(`https://api.weatherapi.com/v1/current.json?q=${lat},${long}&key=${Weather_key}`);
             let json = await result.json();
             return json;
         }
