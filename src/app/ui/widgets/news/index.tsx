@@ -15,11 +15,13 @@ const News = () => {
         let key = `${today.getDate()}-${today.getMonth()}`;
         //Fetch data related to news
         if (!storage.has(key)){
-            const news = API.news.fetchNews()
+            const news = API.news.fetchShareNews()
             news.then(res => {
-                setCardData(res.articles)
-                setDataLoading(false)
-                storage.add(key, res.articles)
+                if (res.code === 200 && res.data.length) {
+                    setCardData(res.data.slice(0, 10))
+                    setDataLoading(false)
+                    storage.add(key, res.data)
+                }
             })
             .catch(err => console.log('errpr', err))
         } else {

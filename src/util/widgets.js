@@ -1,5 +1,6 @@
-const API_KEY = process.env.NEXT_APP_WEATHER_API ?? "f4716b73b76a3bec3cf8163b5f3bed77"
-const Weather_key = process.env.NEXT_APP_WEATHER_KEY ?? "5ed38abe729f4dfe896115127241404"
+const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API ?? "f4716b73b76a3bec3cf8163b5f3bed77"
+const Weather_key = process.env.NEXT_PUBLIC_WEATHER_KEY ?? "5ed38abe729f4dfe896115127241404"
+const SHARE_NEWS_API_KEY = process.env.NEXT_PUBLIC_SHARE_NEWS_KEY
 
 const API =  {
     weather: {
@@ -17,10 +18,35 @@ const API =  {
         }
     },
     news: {
-        api_key: process.env.NEXT_APP_NEWS_API ?? "2968a72780ba4772b7fbb9fc1f92bc12",
-        fetchNews: async function() {
-            const result = await fetch(`https://newsapi.org/v2/top-headlines?country=in&apiKey=${this.api_key}`);
-            return await result.json()
+        fetchShareNews: async function() {
+            let data = [];
+            try {
+                const result = await fetch(`https://share-market-news-api-india.p.rapidapi.com/marketNews`, {
+                    headers: {
+                        'X-RapidAPI-Key': SHARE_NEWS_API_KEY,
+                        'X-RapidAPI-Host': 'share-market-news-api-india.p.rapidapi.com'
+                    }
+                });
+                if (result.status === 200){
+                    data =  await result.json()
+                } else {
+                    let error = new Error(result.statusText)
+                    error.code = result.status
+                    throw error
+                }
+                return {
+                    code: 200,
+                    data
+                }
+            } catch (error) {
+                if (error.code === 500) {
+                    return this.fetchShareNews()
+                }
+                return {
+                    code: 400,
+                    data: []
+                }
+            }
         }
     }
 }
