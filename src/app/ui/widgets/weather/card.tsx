@@ -47,20 +47,20 @@ const Card: React.FC<CardProps> = ({place, weather}) => {
                     <span className="text-2xl">{weather.temp_f}&deg;F</span>
                 </div>
             </div>
-            <h5>{weather.text}</h5>
+            <h4><b>{weather.text}</b></h4>
           </div>
           <div className="flex flex-col gap-3">
-            <div className="flex flex-row justify-evenly">
+            <div className="flex flex-row justify-between">
                 <Image src="/images/icon/wind.svg" width={30} height={30} alt="Wind" title="Wind"/>
-                <small><b>({weather.wind_kph}/kmph)</b></small>
+                <small><b>{weather.wind_kph}/kmph</b></small>
             </div>
-            <div className="flex flex-row justify-evenly">
+            <div className="flex flex-row justify-between">
                 <Image src="/images/icon/pressure.svg" width={30} height={30} alt="Pressure" title="Pressure" />
-                <small><b>({weather.pressure_mb}/mb)</b></small>
+                <small><b>{weather.pressure_mb}/mb</b></small>
             </div>
-            <div className="flex flex-row justify-evenly">
+            <div className="flex flex-row justify-between">
                 <Image src="/images/icon/humidity.svg" width={30} height={30} alt="Humidity" title="Humidity"/>
-                <small><b>({weather.humidity}/mb)</b></small>
+                <small><b>{weather.humidity}/mb</b></small>
             </div>
           </div>
         </div>

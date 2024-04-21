@@ -40,7 +40,7 @@ const Weather = () => {
         storage.add('weather', data)
     }
 
-    useEffect(() => {
+    function callApiAndHandleResponse() {
         if (!storage.has('weather')) {
             if(location.lat && location.long){
                 const result = API.weather.fetchWeatherApi2(location.lat, location.long)
@@ -49,12 +49,28 @@ const Weather = () => {
                     }).catch(err => console.log('error', err))
             }
         } else {
-            let data = storage.get('weather')
+            const data = storage.get('weather')
+            let refresh = false;
+
+            if(typeof data === "undefined") {
+                refresh = true
+            }else if(typeof data === "object" && data.hasOwnProperty('weather')) {
+                let now: number = new Date().getTime();
+                let updatedTime: number = new Date(data.weather.last_updated).getTime();
+                refresh = Math.floor((now - updatedTime)/ (1000 * 60)) > 60
+            }
+            //Remove key and call api to fetch latest record
+            if (refresh) {
+                storage.delete('weather')
+                return callApiAndHandleResponse()
+            }
             setCardData(data)
             setDataLoading(false)
         }
-        
-    
+    }
+
+    useEffect(() => {
+        callApiAndHandleResponse();
     }, [location])
 
     useEffect(() => {
